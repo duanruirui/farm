@@ -1,0 +1,17 @@
+上传文件到网站根目录下
+
+导入数据库文件到数据库里
+
+修改data/config文件下数据库数据：
+
+$config['db']['master']['host'] = '127.0.0.1';
+$config['db']['master']['username'] = '数据库用户名';
+$config['db']['master']['password'] = '数据库密码';
+$config['db']['master']['port'] = '3306';
+$config['db']['master']['database'] = '数据库名';
+$config['db']['master']['charset'] = 'utf8';
+$config['db']['master']['pconnect'] = 0;
+$config['db']['master']['tablepre'] = 'ims_';
+
+默认用户名：admin 密码：admin
+
