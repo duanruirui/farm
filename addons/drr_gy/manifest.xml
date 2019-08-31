@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.w7.cc" versionCode="">
+	
+	<application setting='false'>
+		<name><![CDATA[生态农业物联网]]></name>
+
+		<identifie><![CDATA[drr_gy]]></identifie>
+
+		<version><![CDATA[1.0.0]]></version>
+
+		<ability><![CDATA[xxx]]></ability>
+
+		<type><![CDATA[xxx]]></type>
+
+		<description><![CDATA[农业果园菜园认养，物联网监控，享受生态绿色果蔬]]></description>
+
+		<author><![CDATA[drr2019]]></author>
+
+		<url><![CDATA[xxx]]></url>
+
+		<setting><![CDATA[xxx]]></setting>
+
+	</application>
+
+	
+	<platform>
+		<subscribes>
+			<message type="text" />
+
+			<message type="image" />
+
+			<message type="voice" />
+
+			<message type="video" />
+
+			<message type="shortvideo" />
+
+			<message type="location" />
+
+			<message type="link" />
+
+			<message type="subscribe" />
+
+			<message type="qr" />
+
+			<message type="trace" />
+
+			<message type="click" />
+
+			<message type="merchant_order" />
+
+			<message type="user_get_card" />
+
+			<message type="user_del_card" />
+
+			<message type="user_consume_card" />
+
+		</subscribes>
+
+		<handles>
+
+			<message type="text" />
+			<message type="image" />
+			<message type="voice" />
+			<message type="video" />
+			<message type="shortvideo" />
+			<message type="location" />
+			<message type="link" />
+			<message type="subscribe" />
+			<message type="qr" />
+			<message type="trace" />
+			<message type="click" />
+			<message type="merchant_order" />
+			<message type="user_get_card" />
+			<message type="user_del_card" />
+			<message type="user_consume_card" />
+		</handles>
+
+		<rule embed="false" />
+
+		<rule embed="false" />
+
+	<supports>
+
+			<item type="app" />
+			<item type="wxapp" />
+			<item type="webapp" />
+			<item type="system_welcome" />
+			<item type="android" />
+			<item type="ios" />
+			<item type="xzapp" />
+			<item type="aliapp" />
+			<item type="toutiaoapp" />
+			<item type="baiduapp" />
+	</supports>
+
+	</platform>
+
+	
+	<bindings>
+
+		<cover>
+			<entry title="生态农业首页" do="index" state="index" direct="" />
+		</cover>
+
+		<menu>
+			<entry title="系统首页" do="index" state="index" direct="false" />
+		</menu>
+
+	</bindings>
+
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_acode` (
+  `id` int(11) NOT NULL COMMENT '该id不自动增加',
+  `time` varchar(30) NOT NULL COMMENT '时间',
+  `code` text NOT NULL COMMENT '码',
+  `url` varchar(255) NOT NULL,
+  `uncode` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL COMMENT '分类',
+  `sort` int(11) DEFAULT NULL COMMENT '排序',
+  `price` decimal(11,2) DEFAULT NULL COMMENT '价格',
+  `label` varchar(200) DEFAULT NULL COMMENT '标签',
+  `content` text,
+  `detail` text,
+  `pic` varchar(200) DEFAULT NULL,
+  `num` int(11) DEFAULT NULL,
+  `vir` int(11) DEFAULT '0',
+  `img` varchar(200) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `starttime` varchar(50) DEFAULT NULL,
+  `endtime` varchar(50) DEFAULT NULL,
+  `isrecommend` int(1) DEFAULT NULL,
+  `video_img` varchar(200) DEFAULT NULL,
+  `video` varchar(200) DEFAULT NULL,
+  `comment` int(2) DEFAULT NULL,
+  `fenxiangtu` varchar(255) DEFAULT NULL,
+  `isshow` int(2) DEFAULT NULL,
+  `indeximg` varchar(200) DEFAULT NULL,
+  `oriprice` decimal(11,2) DEFAULT NULL,
+  `imgs` text,
+  `lottery` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_activityorder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ordernum` varchar(20) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `aid` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `price` decimal(11,2) DEFAULT NULL,
+  `num` int(11) DEFAULT NULL,
+  `uname` varchar(50) DEFAULT NULL,
+  `phone` varchar(50) DEFAULT NULL,
+  `addr` varchar(200) DEFAULT NULL,
+  `out_trade_no` varchar(50) DEFAULT NULL COMMENT '单号',
+  `out_refund_no` varchar(50) DEFAULT NULL,
+  `istui` int(2) DEFAULT NULL,
+  `isping` int(2) DEFAULT '0' COMMENT '是否评价',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_activityping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `aid` int(11) DEFAULT NULL COMMENT '活动ID',
+  `content` varchar(300) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL COMMENT '推荐状态',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_activityzan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `apid` int(11) DEFAULT NULL COMMENT '活动评论ID',
+  `uniacid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_adopt` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL COMMENT '认养名称',
+  `lottery` varchar(200) DEFAULT NULL,
+  `price` decimal(11,2) DEFAULT NULL,
+  `vir` int(11) DEFAULT NULL COMMENT '虚拟数量',
+  `top` int(11) DEFAULT NULL COMMENT '截止数量',
+  `label` varchar(200) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL COMMENT '首页显示图片为1，视频为2',
+  `img` varchar(100) DEFAULT NULL COMMENT '首页图片',
+  `video_img` varchar(255) DEFAULT NULL,
+  `video` varchar(200) DEFAULT NULL COMMENT '首页视频',
+  `pic` varchar(100) DEFAULT NULL COMMENT '缩略图',
+  `content` text COMMENT '项目介绍',
+  `detail` text COMMENT '认养须知',
+  `agreement` text COMMENT '认养协议',
+  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `uniacid` int(11) DEFAULT NULL,
+  `day` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `count` int(11) DEFAULT NULL,
+  `proname` varchar(50) DEFAULT NULL COMMENT '项目介绍产品名称',
+  `prolottery` varchar(200) DEFAULT NULL COMMENT '产品简介',
+  `title` varchar(50) DEFAULT NULL COMMENT '协议标题',
+  `storeid` int(11) DEFAULT NULL COMMENT '牧户ID',
+  `imgs` text COMMENT '轮播图',
+  `isshow` int(1) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_adoptorder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ordernum` varchar(20) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `aid` int(11) DEFAULT NULL COMMENT '认养ID',
+  `num` int(11) DEFAULT NULL COMMENT '领养数量',
+  `uniacid` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `price` decimal(11,2) DEFAULT NULL COMMENT '总价',
+  `time` int(11) DEFAULT NULL,
+  `uname` varchar(20) DEFAULT NULL,
+  `addr` varchar(200) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `waybill` varchar(50) DEFAULT NULL COMMENT '运单码',
+  `way` varchar(50) DEFAULT NULL COMMENT '快递方式',
+  `out_trade_no` varchar(50) DEFAULT NULL,
+  `out_refund_no` varchar(50) DEFAULT NULL,
+  `istui` int(2) DEFAULT NULL,
+  `isping` int(2) DEFAULT '0' COMMENT '是否评价',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL COMMENT '标题',
+  `content` text CHARACTER SET utf8 NOT NULL COMMENT '内容',
+  `seenum` int(11) NOT NULL COMMENT '查看数量',
+  `commentnum` int(11) NOT NULL COMMENT '评论数量',
+  `addtime` int(11) NOT NULL COMMENT '添加时间',
+  `introduction` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '简介',
+  `likenum` int(11) NOT NULL COMMENT '点赞数',
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `sort` int(5) NOT NULL DEFAULT '255' COMMENT '排序',
+  `istop` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否置顶，0不置顶，1置顶',
+  `img` varchar(255) COLLATE utf8mb4_turkish_ci NOT NULL COMMENT '缩略图片',
+  `gid` int(11) NOT NULL COMMENT '商品id',
+  `sid` int(11) NOT NULL COMMENT '门店id',
+  `isshow` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1显示，0不显示',
+  `cid` int(11) NOT NULL COMMENT '分类id',
+  `status` int(11) DEFAULT NULL,
+  `isrecommend` int(1) DEFAULT NULL,
+  `video` varchar(200) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
+  `video_img` varchar(200) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
+  `comment` int(2) DEFAULT NULL,
+  `fenxiangtu` varchar(255) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
+  `imgs` text COLLATE utf8mb4_turkish_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_articlecate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL COMMENT '店铺分类名称',
+  `img` varchar(200) NOT NULL COMMENT '店铺分类图',
+  `sort` int(5) NOT NULL COMMENT '排序',
+  `addtime` int(11) NOT NULL COMMENT '添加时间',
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `notice` varchar(100) DEFAULT NULL,
+  `detail` text,
+  `num` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_articleping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `aid` int(11) DEFAULT NULL COMMENT '文章ID',
+  `content` varchar(300) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL COMMENT '推荐状态',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_articlezan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `apid` int(11) DEFAULT NULL COMMENT '文章评论ID',
+  `uniacid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_circle` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(255) NOT NULL,
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `content` text NOT NULL COMMENT '圈子内容',
+  `img` text NOT NULL COMMENT '图片',
+  `addtime` int(11) NOT NULL COMMENT '添加时间',
+  `commentnum` int(11) NOT NULL COMMENT '评论数',
+  `likenum` int(11) NOT NULL COMMENT '点赞数',
+  `isshow` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否显示',
+  `uid` int(11) NOT NULL COMMENT '用户id',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_circlecomment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(255) NOT NULL COMMENT 'openid',
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `cid` int(11) NOT NULL COMMENT '圈子id',
+  `content` text NOT NULL COMMENT '评论内容',
+  `uname` varchar(255) NOT NULL COMMENT '评论人姓名',
+  `uid` int(11) NOT NULL COMMENT '评论人id',
+  `uimg` varchar(255) NOT NULL COMMENT '评论人头像',
+  `addtime` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_circlelike` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL COMMENT 'uid',
+  `openid` varchar(255) NOT NULL COMMENT 'openid',
+  `cid` int(11) NOT NULL COMMENT '圈子id',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `uimg` varchar(255) NOT NULL COMMENT '用户头像',
+  `uniacid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_crowd` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL COMMENT '众筹名称',
+  `lottery` varchar(200) DEFAULT NULL,
+  `price` decimal(11,2) DEFAULT NULL,
+  `lower` int(11) DEFAULT NULL COMMENT '发起数量',
+  `vir` int(11) DEFAULT NULL COMMENT '虚拟数量',
+  `top` int(11) DEFAULT NULL COMMENT '截止数量',
+  `label` varchar(200) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL COMMENT '首页显示图片为1，视频为2',
+  `img` varchar(100) DEFAULT NULL COMMENT '首页图片',
+  `video_img` varchar(255) DEFAULT NULL,
+  `video` varchar(200) DEFAULT NULL COMMENT '首页视频',
+  `pic` varchar(100) DEFAULT NULL COMMENT '缩略图',
+  `count` int(11) DEFAULT NULL,
+  `content` text COMMENT '项目介绍',
+  `detail` text COMMENT '认养须知',
+  `agreement` text COMMENT '认养协议',
+  `status` int(11) DEFAULT NULL COMMENT '状态',
+  `uniacid` int(11) DEFAULT NULL,
+  `day` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `proname` varchar(50) DEFAULT NULL COMMENT '项目介绍产品名称',
+  `prolottery` varchar(200) DEFAULT NULL COMMENT '产品简介',
+  `title` varchar(50) DEFAULT NULL COMMENT '协议标题',
+  `gearone` decimal(11,2) DEFAULT NULL,
+  `geartwo` decimal(11,2) DEFAULT NULL,
+  `gearthree` decimal(11,2) DEFAULT NULL,
+  `gearfour` decimal(11,2) DEFAULT NULL,
+  `gearfive` decimal(11,2) DEFAULT NULL,
+  `introone` varchar(200) DEFAULT NULL,
+  `introtwo` varchar(200) DEFAULT NULL,
+  `introthree` varchar(200) DEFAULT NULL,
+  `introfour` varchar(200) DEFAULT NULL,
+  `introfive` varchar(200) DEFAULT NULL,
+  `imgs` text,
+  `storeid` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_crowdorder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ordernum` varchar(20) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL COMMENT '众筹ID',
+  `num` int(11) DEFAULT NULL COMMENT '领养数量',
+  `uniacid` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `price` decimal(11,2) DEFAULT NULL COMMENT '总价',
+  `time` int(11) DEFAULT NULL,
+  `uname` varchar(20) DEFAULT NULL,
+  `addr` varchar(200) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `waybill` varchar(50) DEFAULT NULL COMMENT '运单码',
+  `way` varchar(50) DEFAULT NULL COMMENT '快递方式',
+  `out_trade_no` varchar(50) DEFAULT NULL,
+  `out_refund_no` varchar(50) DEFAULT NULL,
+  `istui` int(2) DEFAULT NULL,
+  `gear` int(2) DEFAULT NULL,
+  `isping` int(2) DEFAULT '0' COMMENT '是否评价',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_dynamic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` varchar(500) DEFAULT NULL COMMENT '动态内容',
+  `pid` int(11) DEFAULT NULL COMMENT '认养或者众筹ID',
+  `state` int(1) DEFAULT NULL COMMENT '认养1，众筹2',
+  `status` int(1) DEFAULT NULL COMMENT '状态',
+  `time` int(11) DEFAULT NULL,
+  `img` text,
+  `uniacid` int(11) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '商品id',
+  `gname` varchar(100) NOT NULL COMMENT '商品名称',
+  `price` decimal(10,2) DEFAULT NULL COMMENT '原价',
+  `img` varchar(200) DEFAULT NULL,
+  `pic` varchar(200) DEFAULT NULL COMMENT '封面图',
+  `cid` int(11) DEFAULT NULL COMMENT '商品是否推荐，1推荐，2不推荐',
+  `status` int(11) DEFAULT NULL COMMENT '商品状态，1为审核，2审核通过，3删除',
+  `uniacid` int(11) DEFAULT NULL,
+  `content` text COMMENT '商品详情',
+  `num` int(11) DEFAULT NULL,
+  `sort` int(5) NOT NULL DEFAULT '255' COMMENT '排序',
+  `sid` int(11) NOT NULL COMMENT '商家id',
+  `storename` varchar(255) NOT NULL COMMENT '商家名称',
+  `isrecommend` int(1) NOT NULL DEFAULT '0' COMMENT '1推荐，0不推荐',
+  `spec` varchar(50) DEFAULT NULL COMMENT '分类ID',
+  `speccontent` varchar(200) DEFAULT NULL,
+  `specnum` varchar(200) DEFAULT NULL,
+  `specprice` varchar(200) DEFAULT NULL,
+  `detail` text,
+  `video_img` varchar(200) DEFAULT NULL,
+  `video` varchar(200) DEFAULT NULL,
+  `comment` int(2) DEFAULT NULL COMMENT '是否开启评论',
+  `fenxiangtu` varchar(255) DEFAULT NULL,
+  `isshow` tinyint(1) DEFAULT NULL,
+  `indeximg` varchar(200) DEFAULT NULL,
+  `oriprice` decimal(11,2) DEFAULT NULL,
+  `imgs` text,
+  `lottery` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品 ';
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_goodsorder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ordernum` varchar(20) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `gid` int(11) DEFAULT NULL COMMENT '产品ID',
+  `num` int(11) DEFAULT NULL COMMENT '数量',
+  `price` decimal(11,2) DEFAULT NULL COMMENT '总价',
+  `status` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `spec` varchar(20) DEFAULT NULL COMMENT '所选规格',
+  `time` int(11) DEFAULT NULL,
+  `uname` varchar(20) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `addr` varchar(200) DEFAULT NULL,
+  `waybill` varchar(50) DEFAULT NULL COMMENT '运单码',
+  `way` varchar(50) DEFAULT NULL COMMENT '快递方式',
+  `out_trade_no` varchar(50) DEFAULT NULL,
+  `out_refund_no` varchar(50) DEFAULT NULL,
+  `istui` int(2) DEFAULT NULL COMMENT '是否退款',
+  `isping` int(2) DEFAULT '0' COMMENT '是否评价',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_goodsping` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `gid` int(11) DEFAULT NULL COMMENT '产品ID',
+  `content` varchar(300) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL COMMENT '推荐状态',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_goodszan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `gpid` int(11) DEFAULT NULL COMMENT '文章评论ID',
+  `uniacid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_hongdian` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `state` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `cid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_mercapdetails` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL COMMENT '商家id',
+  `storename` varchar(100) NOT NULL COMMENT '商家名称',
+  `mcd_type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '类型，1订单收入，2提现，3线下收款（线下收入直接打进商家账号，这里只是一个记录）',
+  `mcd_memo` text NOT NULL COMMENT '订单收入等具体信息',
+  `addtime` int(11) NOT NULL COMMENT '时间',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '金额',
+  `paycommission` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '提现的时候，支付的佣金',
+  `uniacid` int(11) NOT NULL COMMENT '11',
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '状态，1成功，2不成功',
+  `order_id` int(11) NOT NULL DEFAULT '0' COMMENT '订单id',
+  `wd_id` int(11) NOT NULL DEFAULT '0' COMMENT '提现id',
+  `ratesmoney` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '手续费',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_notice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(100) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_opinion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) DEFAULT NULL,
+  `question` varchar(300) DEFAULT NULL,
+  `reply` text,
+  `uniacid` int(11) DEFAULT NULL,
+  `time` int(11) DEFAULT NULL,
+  `replytime` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_order` (
+  `oid` int(11) NOT NULL AUTO_INCREMENT,
+  `orderNum` varchar(50) NOT NULL COMMENT '订单号',
+  `detailInfo` varchar(200) DEFAULT NULL COMMENT '地址',
+  `telNumber` varchar(100) DEFAULT NULL COMMENT '电话',
+  `money` decimal(10,2) DEFAULT NULL COMMENT '总价',
+  `status` varchar(255) DEFAULT '2' COMMENT '1 取消订单，2待支付，3待发货，4已支付，5已完成',
+  `openid` varchar(150) DEFAULT NULL COMMENT '用户id',
+  `uniacid` int(11) DEFAULT NULL,
+  `countyName` varchar(150) DEFAULT NULL COMMENT '区域',
+  `provinceName` varchar(150) DEFAULT NULL COMMENT '省份',
+  `name` varchar(100) DEFAULT NULL COMMENT '名字',
+  `addtime` varchar(100) DEFAULT NULL COMMENT '加入的时间',
+  `cityName` varchar(100) DEFAULT NULL COMMENT '城市',
+  `uremark` varchar(100) DEFAULT NULL,
+  `sincetype` varchar(100) DEFAULT NULL,
+  `time` varchar(100) DEFAULT NULL,
+  `paytime` int(11) NOT NULL COMMENT '付款时间',
+  `gid` int(11) NOT NULL COMMENT '商品id',
+  `gname` varchar(100) NOT NULL COMMENT '商品名称',
+  `num` int(11) NOT NULL COMMENT '件数',
+  `out_trade_no` varchar(100) NOT NULL COMMENT '外部订单号',
+  `ordertype` tinyint(1) NOT NULL COMMENT '类型，待用',
+  `deliveryfee` decimal(10,2) NOT NULL COMMENT '运费',
+  `goodsimg` varchar(200) NOT NULL COMMENT '商品图',
+  `bid` int(11) NOT NULL COMMENT '商家id',
+  `bname` varchar(100) NOT NULL COMMENT '商家名称',
+  `isrefund` tinyint(2) NOT NULL DEFAULT '0' COMMENT '0正常，1申请退款，2已退款',
+  `shipnum` varchar(50) NOT NULL COMMENT '快递单号',
+  `shipname` varchar(50) NOT NULL COMMENT '快递名称',
+  `shiptime` int(11) NOT NULL COMMENT '发货时间',
+  `finishtime` int(11) NOT NULL COMMENT '结束时间',
+  `out_refund_no` varchar(100) NOT NULL COMMENT '退款单号',
+  `expirationtime` int(11) NOT NULL COMMENT '核销过期时间',
+  PRIMARY KEY (`oid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_pageset` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name1` text,
+  `name2` text,
+  `img1` varchar(255) DEFAULT NULL,
+  `img2` varchar(255) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `name3` text,
+  `img3` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_popbanner` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `img` varchar(200) NOT NULL COMMENT '弹窗图',
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `sort` int(11) NOT NULL COMMENT '排序',
+  `status` int(2) DEFAULT NULL,
+  `path` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_prointroduce` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content` text COMMENT '项目介绍',
+  `uniacid` int(11) DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `agreement` text COMMENT '认养协议',
+  `detail` text COMMENT '认养须知',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `question` varchar(100) DEFAULT NULL,
+  `answer` varchar(300) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_recommen` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state1` int(11) DEFAULT NULL,
+  `id1` int(11) DEFAULT NULL,
+  `state2` int(11) DEFAULT NULL,
+  `id2` int(11) DEFAULT NULL,
+  `state3` int(11) DEFAULT NULL,
+  `id3` int(11) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `articlestate` int(11) DEFAULT NULL,
+  `goodsstate` int(11) DEFAULT NULL,
+  `activitystate` int(11) DEFAULT NULL,
+  `activityadd` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_service` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) DEFAULT NULL,
+  `content` varchar(200) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_settab` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `path` varchar(100) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  `img` varchar(200) DEFAULT NULL,
+  `type` int(2) DEFAULT NULL COMMENT '1为首页，2为底部',
+  `imgs` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_sms` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uniacid` int(11) NOT NULL,
+  `is_open` int(11) NOT NULL DEFAULT '2',
+  `tid1` varchar(50) NOT NULL,
+  `tid2` varchar(50) NOT NULL,
+  `tid3` varchar(50) NOT NULL,
+  `tid4` varchar(50) DEFAULT NULL COMMENT '开奖模板',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_spec` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `state` int(11) DEFAULT NULL COMMENT '规格名称',
+  `aid` int(11) DEFAULT NULL COMMENT '规格内容',
+  `uniacid` int(11) DEFAULT NULL,
+  `sort` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_store` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `storename` varchar(120) NOT NULL COMMENT '名称',
+  `logo` varchar(255) DEFAULT NULL COMMENT 'logo',
+  `content` text COMMENT '描述',
+  `uniacid` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '0' COMMENT '审核状态，0审核中，1审核通过，2拒绝',
+  `phone` varchar(100) DEFAULT NULL COMMENT '电话',
+  `address` varchar(255) DEFAULT NULL COMMENT '地址',
+  `img` text COMMENT '轮播图',
+  `bind_openid` varchar(255) DEFAULT NULL COMMENT '绑定的openid',
+  `uname` varchar(50) NOT NULL COMMENT '联系人',
+  `starttime` varchar(30) DEFAULT NULL COMMENT '营业时间，开始',
+  `endtime` varchar(30) DEFAULT NULL COMMENT '营业时间，结束',
+  `coordinates` varchar(50) DEFAULT NULL COMMENT '经纬度',
+  `longitude` varchar(50) DEFAULT NULL COMMENT '经度',
+  `latitude` varchar(50) DEFAULT NULL COMMENT '纬度',
+  `lt_id` int(11) NOT NULL DEFAULT '0' COMMENT '入驻周期id',
+  `lt_day` int(11) NOT NULL DEFAULT '0' COMMENT '入驻周期时间',
+  `finishtime` int(11) NOT NULL DEFAULT '0' COMMENT '入驻结束时间，用于缴费',
+  `paytime` int(11) NOT NULL DEFAULT '0' COMMENT '入驻缴费完成时间',
+  `facility` varchar(50) NOT NULL DEFAULT '0' COMMENT '设施id，用，号分隔',
+  `sc_id` int(11) NOT NULL COMMENT '分类id',
+  `sc_name` varchar(100) NOT NULL COMMENT '分类名称',
+  `totalamount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '总金额',
+  `frozenamount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '冻结金额',
+  `commission` float NOT NULL DEFAULT '0' COMMENT '佣金比例',
+  `memdiscount` float NOT NULL DEFAULT '0' COMMENT '会员折扣，线下付款',
+  `istop` tinyint(1) NOT NULL DEFAULT '0' COMMENT '置顶',
+  `sort` int(11) NOT NULL DEFAULT '255' COMMENT '排序',
+  `state` int(11) DEFAULT NULL,
+  `num` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_storedynamic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) DEFAULT NULL COMMENT '所属牧户ID',
+  `uniacid` int(11) DEFAULT NULL,
+  `video` varchar(255) DEFAULT NULL,
+  `video2` varchar(255) DEFAULT NULL,
+  `video3` varchar(255) DEFAULT NULL,
+  `video_img` varchar(255) DEFAULT NULL,
+  `video_img2` varchar(255) DEFAULT NULL,
+  `video_img3` varchar(255) DEFAULT NULL,
+  `content` text,
+  `content2` text,
+  `content3` text,
+  `status` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_storenotice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` text COMMENT '牧户通知',
+  `uniacid` int(11) DEFAULT NULL,
+  `agreement` text COMMENT '用户协议',
+  `starttime` varchar(50) DEFAULT NULL,
+  `endtime` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_system` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `appid` varchar(100) DEFAULT NULL COMMENT 'appid',
+  `appsecret` varchar(200) DEFAULT NULL COMMENT 'appsecret',
+  `mchid` varchar(100) DEFAULT NULL COMMENT '商户号',
+  `wxkey` varchar(250) DEFAULT NULL COMMENT '商户秘钥',
+  `uniacid` int(11) DEFAULT NULL,
+  `url_name` varchar(20) DEFAULT NULL COMMENT '网址名称',
+  `details` text COMMENT '关于我们',
+  `url_logo` varchar(100) DEFAULT NULL COMMENT '网址logo',
+  `link_name` varchar(30) DEFAULT NULL COMMENT '网站名称',
+  `link_logo` varchar(100) DEFAULT NULL COMMENT '网站logo',
+  `pt_name` varchar(100) DEFAULT NULL COMMENT '平台名称',
+  `mail` varchar(100) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `tel` varchar(20) DEFAULT NULL,
+  `pic` varchar(200) DEFAULT NULL,
+  `apiclient_key` varchar(100) DEFAULT NULL,
+  `apiclient_cert` varchar(100) DEFAULT NULL,
+  `fontcolor` varchar(100) DEFAULT NULL,
+  `tech_title` varchar(50) NOT NULL COMMENT '技术支持名称',
+  `tech_img` varchar(100) NOT NULL COMMENT '技术支持logo',
+  `tech_phone` varchar(50) NOT NULL COMMENT '技术支持电话',
+  `is_show_tech` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0不显示，1显示',
+  `is_open_pop` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0关闭首页弹窗，1开启首页弹窗',
+  `showcheck` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1过审页面，0正常页面',
+  `version` varchar(30) NOT NULL COMMENT '小程序版本号',
+  `wg_title` varchar(255) DEFAULT NULL COMMENT '福利群标题',
+  `wg_directions` varchar(255) DEFAULT NULL COMMENT '福利群说明',
+  `wg_img` varchar(255) DEFAULT NULL COMMENT '福利群图标',
+  `wg_keyword` varchar(255) DEFAULT NULL COMMENT '福利群加群关键字',
+  `showgw` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否显示，0不显示，1显示',
+  `wg_addicon` varchar(255) DEFAULT NULL COMMENT '福利群加群关键字',
+  `is_open_circle` tinyint(1) NOT NULL DEFAULT '0' COMMENT '圈子0不审核，1审核',
+  `is_homeshow_circle` tinyint(2) NOT NULL DEFAULT '1' COMMENT '是否在首页显示，1显示，0不显示',
+  `store_open` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'store_open',
+  `store_in_notice` text NOT NULL,
+  `color` varchar(20) NOT NULL COMMENT '平台头部颜色',
+  `fenxiangtu` varchar(255) DEFAULT NULL,
+  `fenxiangtu2` varchar(255) DEFAULT NULL,
+  `fenxiangtu3` varchar(255) DEFAULT NULL,
+  `fenxiangzi` varchar(255) DEFAULT NULL,
+  `fenxiangzi2` varchar(255) DEFAULT NULL,
+  `fenxiangzi3` varchar(255) DEFAULT NULL,
+  `haibaotu` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_tab` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `index` varchar(20) DEFAULT NULL COMMENT '首页入口名称',
+  `indeximg` varchar(200) DEFAULT NULL,
+  `indeximgs` varchar(200) DEFAULT NULL,
+  `found` varchar(20) DEFAULT NULL COMMENT '发现入口名称',
+  `foundimg` varchar(200) DEFAULT NULL,
+  `foundimgs` varchar(200) DEFAULT NULL,
+  `my` varchar(20) DEFAULT NULL COMMENT '个人中心入口名称',
+  `myimg` varchar(200) DEFAULT NULL,
+  `myimgs` varchar(200) DEFAULT NULL,
+  `uniacid` int(11) DEFAULT NULL,
+  `adopt` varchar(20) DEFAULT NULL COMMENT '个人中心入口名称',
+  `adoptimg` varchar(200) DEFAULT NULL,
+  `adoptimgs` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'iq',
+  `openid` varchar(100) DEFAULT NULL COMMENT 'openid',
+  `img` varchar(200) DEFAULT NULL COMMENT '头像',
+  `time` varchar(50) DEFAULT NULL COMMENT '登录时间',
+  `uniacid` int(11) DEFAULT NULL,
+  `money` decimal(11,2) DEFAULT '0.00',
+  `name` varchar(100) DEFAULT NULL,
+  `addtime` varchar(50) DEFAULT NULL COMMENT '会员的添加的时间',
+  `num` int(11) DEFAULT '0' COMMENT '邀请人数',
+  `endtime` varchar(50) DEFAULT NULL COMMENT '结束时间',
+  `telphone` varchar(20) NOT NULL COMMENT '手机号码',
+  `success` int(11) DEFAULT NULL COMMENT '成功人数',
+  `commission` int(11) DEFAULT NULL COMMENT '佣金',
+  `inviter` int(11) DEFAULT NULL COMMENT '邀请人ID，state为1，则为用户ID，state为2，则为业务ID',
+  `state` int(2) DEFAULT NULL COMMENT '邀请详情，1为用户邀请，2为业务邀请',
+  `invitertime` int(11) DEFAULT NULL COMMENT '邀请时间',
+  `hongdian` int(2) DEFAULT '2',
+  `hongdian1` int(2) DEFAULT '2',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_userformid` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `form_id` varchar(50) NOT NULL COMMENT 'form_id',
+  `time` datetime NOT NULL,
+  `uniacid` varchar(50) NOT NULL,
+  `openid` varchar(50) NOT NULL COMMENT 'openid',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='formid表';
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_withdraw` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `openid` varchar(200) NOT NULL COMMENT '提现用户oppenid',
+  `money` decimal(10,2) NOT NULL COMMENT '提现金额',
+  `wd_type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '提现方式，1微信，2支付宝，3银行账号',
+  `wd_account` varchar(100) NOT NULL COMMENT '提现账号',
+  `wd_name` varchar(50) NOT NULL COMMENT '提现名字',
+  `wd_phone` varchar(50) NOT NULL COMMENT '提现联系方式',
+  `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0审核中，1通过审核，2拒绝提现，3自动打款',
+  `realmoney` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '实际金额',
+  `paycommission` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '需要支付佣金',
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `ratesmoney` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '手续费',
+  `bid` int(11) NOT NULL DEFAULT '0' COMMENT '商家id',
+  `bname` varchar(100) NOT NULL COMMENT '提现商家名称',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_withdrawset` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `wd_type` varchar(50) NOT NULL DEFAULT '1' COMMENT '（1,2,3）提现方式，1微信支付，2支付宝，3银行打款',
+  `min_money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '最低提现金额',
+  `avoidmoney` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '免审金额，可直接提现金额',
+  `wd_content` text NOT NULL COMMENT '提现须知',
+  `cms_rates` float NOT NULL DEFAULT '0' COMMENT '平台佣金比率',
+  `uniacid` int(11) NOT NULL COMMENT 'uniacid',
+  `is_open` tinyint(1) NOT NULL DEFAULT '1' COMMENT '提现开关，2关，1开',
+  `wd_wxrates` float NOT NULL DEFAULT '0' COMMENT '微信提现手续费',
+  `wd_alipayrates` float NOT NULL DEFAULT '0' COMMENT '支付宝提现手续费',
+  `wd_bankrates` float NOT NULL DEFAULT '0' COMMENT '银行卡提现手续费',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+		]]>
+		
+	</install>
+	<uninstall><![CDATA[
+CDATA[DROP TABLE IF EXISTS `ims_lhyzhnc_sun_acode`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_activity`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_activityorder`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_activityping`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_activityzan`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_admin`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_adopt`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_adoptorder`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_article`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_articlecate`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_articleping`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_articlezan`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_circle`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_circlecomment`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_circlelike`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_crowd`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_crowdorder`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_dynamic`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_goods`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_goodsorder`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_goodsping`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_goodszan`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_hongdian`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_mercapdetails`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_notice`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_opinion`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_order`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_pageset`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_popbanner`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_prointroduce`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_question`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_recommen`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_service`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_settab`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_sms`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_spec`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_store`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_storedynamic`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_storenotice`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_system`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_tab`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_user`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_userformid`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_withdraw`;
+DROP TABLE IF EXISTS `ims_lhyzhnc_sun_withdrawset`;
+		]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

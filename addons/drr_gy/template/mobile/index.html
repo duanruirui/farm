@@ -1,0 +1,124 @@
+<view class="container">
+    <view class="promp-view">
+        <swiper autoplay="{{autoplay}}" class="index-nav-img" duration="{{duration}}" indicatorDots="{{indicatorDots}}" interval="{{interval}}">
+            <swiper-item wx:for="{{banner}}">
+                <image bindtap="menu" class="slide-image" data-idx="1" data-path="{{item.path}}" src="{{url}}{{item.img}}"></image>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="promp">
+        <button class="promp-btn">农场公告</button>
+        <swiper autoplay="true" circular="true" class="flex-1-1" interval="2000" vertical="true">
+            <swiper-item wx:for="{{notice}}">
+                <view>{{item.text}}</view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="nav">
+        <view bindtap="menu" class="nav-i" data-idx="1" data-path="{{item.path}}" wx:for="{{menu}}">
+            <image class="nav-img" src="{{url}}{{item.img}}"></image>
+            <view>{{item.name}}</view>
+        </view>
+    </view>
+    <view class="shop" wx:if="{{adopt.length>0}}">
+        <view class="active-head nopadding">
+            <view>
+                <image class="head-img" src="/resource/images/icon_adopt.png"></image>
+                <view>推荐认养</view>
+            </view>
+            <view bindtap="tolists" data-id="1">
+                <view>更多</view>
+                <image class="arrow-new" src="/resource/images/arrow.png"></image>
+            </view>
+        </view>
+        <view bindtap="toDetail" class="shop-i" data-id="{{item.id}}" data-sid="{{1}}" wx:for="{{adopt}}">
+            <image class="shop-img" src="{{url}}{{item.img}}"></image>
+            <view class="shop-detail">
+                <view class="i-name">{{item.name}}</view>
+                <view class="i-price">￥{{item.price}}</view>
+                <view class="i-bot">已认养 {{item.num}}</view>
+                <button class="join">立即认养</button>
+            </view>
+        </view>
+    </view>
+    <view class="recommend-shop" wx:if="{{goods.length>0}}">
+        <view class="recommend-shop-head">
+            <view>
+                <image class="head-img" src="/resource/images/icon_goods.png"></image>
+                <view>推荐商品</view>
+            </view>
+            <view bindtap="toDiscovery" data-type="{{2}}">
+                <view>更多</view>
+                <image class="arrow-new" src="/resource/images/arrow.png"></image>
+            </view>
+        </view>
+        <view class="recommend-shop-item">
+            <view bindtap="goGood" class="recommend-shop-i" data-id="{{item.id}}" data-name="{{item.name}}" data-state="2" wx:for="{{goods}}">
+                <image class="recommend-img" src="{{url}}{{item.indeximg}}"></image>
+                <view class="recommend-name">{{item.name}}</view>
+                <view class="recommend-price">￥{{item.price}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="active" wx:if="{{activity.length>0}}">
+        <view class="active-head">
+            <view>
+                <image class="head-img" src="/resource/images/icon_activity.png"></image>
+                <view>推荐活动</view>
+            </view>
+            <view bindtap="toDiscovery1" data-type="{{3}}">
+                <view>更多</view>
+                <image class="arrow-new" src="/resource/images/arrow.png"></image>
+            </view>
+        </view>
+        <view class="active-item">
+            <view bindtap="goGood" class="active-i" data-id="{{item.id}}" data-name="{{item.name}}" data-state="3" wx:for="{{activity}}">
+                <image class="active-img" src="{{url}}{{item.indeximg}}"></image>
+                <view class="active-name">{{item.name}}</view>
+                <view class="active-price">￥{{item.price}}
+          <text class="oriprice">{{item.oriprice}}</text>
+                </view>
+                <view class="num">已购{{item.num}}件</view>
+                <button class="sign">去报名</button>
+            </view>
+        </view>
+    </view>
+    <view class="active" style="padding-bottom:50rpx;" wx:if="{{article.length>0}}">
+        <view class="active-head">
+            <view>
+                <image class="head-img" src="/resource/images/icon_book.png"></image>
+                <view>推荐资讯</view>
+            </view>
+            <view bindtap="toDiscovery2" data-type="{{1}}">
+                <view>更多</view>
+                <image class="arrow-new" src="/resource/images/arrow.png"></image>
+            </view>
+        </view>
+        <view class="active-item">
+            <view bindtap="toFoundDetail" class="active-is" data-foundtype="{{item.name}}" data-id="{{item.id}}" data-state="1" wx:for="{{article}}">
+                <image class="active-img" src="{{url}}{{item.img}}"></image>
+                <view class="active-name">{{item.name}}</view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="hideModal" catchtouchmove="ture" class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+    <view animation="{{animationData}}" catchtouchmove="ture" class="attr" wx:if="{{showModalStatus}}">
+        <view class="attr-top">服务说明</view>
+        <scroll-view class="service-scroll" scrollY="true">
+            <view class="item-top" wx:for="{{list.service}}">
+                <image class="icon01" src="/resource/images/icon01.png"></image>
+                <view class="service-view">
+                    <view class="service-title">{{item.title}}</view>
+                    <view class="service-content">{{item.content}}</view>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="{{isIpx?'tabBar-X':'tabBar'}}">
+        <view bindtap="tabChange" class="mg" data-index="{{index}}" wx:for="{{tab_}}">
+            <image src="{{url}}{{item.path==urls?item.imgs:item.img}}"></image>
+            <view>{{item.name}}</view>
+        </view>
+    </view>
+</view>
+<login bindtogetuserinfo="updateUserInfo" modalHidden="{{is_modal_Hidden}}"></login>

@@ -1,0 +1,66 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/mzhk_sun/template/public/ygcss.css">
+<ul class="nav nav-tabs">    
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+   <li class="active"><a href="javascript:void(0);">版权信息</a></li>
+</ul>
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                版权信息
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">是否显示技术支持</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input type="radio" id="emailwy1" name="is_show_tech" value="1" {if $item['is_show_tech']==1 || empty($item['is_show_tech'])}checked{/if} />
+                            <label for="emailwy1">显示</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy2" name="is_show_tech" value="0" {if $item['is_show_tech']==0}checked{/if} />
+                            <label for="emailwy2">不显示</label>
+                        </label>
+                        <span class="help-block">*</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">技术支持名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="tech_title" class="form-control" value="{$item['tech_title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">技术支持电话</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="tech_phone" class="form-control" value="{$item['tech_phone']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">技术支持logo</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('tech_img', $item['tech_img'])}
+                        <span class="help-block">*建议比例 1:1 (64*64)</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #444444;margin-left: 550px;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            <input type="hidden" name="id" value="{$item['id']}" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-12").show();
+        $("#yframe-12").addClass("wyactive");
+    })
+</script>

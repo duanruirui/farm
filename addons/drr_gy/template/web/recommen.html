@@ -1,0 +1,173 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcss.css">
+
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+    <li  class="active"><a href="javascript:void(0);">发现设置</a></li>
+    <!-- <li><a href="{php echo $this->createWebUrl('crowd');}"><i class="fa fa-refresh"></i>返回众筹列表</a></li> -->
+</ul>
+<div class="main ygmain">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+            <!-- <div class="panel-heading wyheader">
+                首页推荐管理
+            </div> -->
+            <!-- <div class="panel-body">
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">类型选择</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy1" name="state1" value="1" {if $info['state1']==1 || empty($info['state1'])}checked{/if} />
+                            <label for="emailwy1">文章</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy2" name="state1" value="2" {if $info['state1']==2}checked{/if} />
+                            <label for="emailwy2">产品</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy3" name="state1" value="3" {if $info['state1']==3}checked{/if} />
+                            <label for="emailwy3">活动</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">id</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="id1" class="form-control" value="{$info['id1']}" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*根据上方选择类型，填写文章、产品或是活动ID</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">类型选择</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy4" name="state2" value="1" {if $info['state2']==1 || empty($info['state2'])}checked{/if} />
+                            <label for="emailwy4">文章</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy5" name="state2" value="2" {if $info['state2']==2}checked{/if} />
+                            <label for="emailwy5">产品</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy6" name="state2" value="3" {if $info['state2']==3}checked{/if} />
+                            <label for="emailwy6">活动</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">id</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="id2" class="form-control" value="{$info['id2']}" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*根据上方选择类型，填写文章、产品或是活动ID</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">类型选择</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy7" name="state3" value="1" {if $info['state3']==1 || empty($info['state3'])}checked{/if} />
+                            <label for="emailwy7">文章</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy8" name="state3" value="2" {if $info['state3']==2}checked{/if} />
+                            <label for="emailwy8">产品</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy9" name="state3" value="3" {if $info['state3']==3}checked{/if} />
+                            <label for="emailwy9">活动</label>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">id</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="id3" class="form-control" value="{$info['id3']}" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*根据上方选择类型，填写文章、产品或是活动ID</div>
+                </div>
+            </div> -->
+            <div class="panel-heading wyheader">
+                开关设置
+            </div>
+            <div class="panel-body">
+                <!-- <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">文章评论审核开关</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy11" name="articlestate" value="1" {if $info['articlestate']==1 || empty($info['articlestate'])}checked{/if} />
+                            <label for="emailwy11">开</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy21" name="articlestate" value="2" {if $info['articlestate']==2}checked{/if} />
+                            <label for="emailwy21">关</label>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">产品评论审核开关</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy41" name="goodsstate" value="1" {if $info['goodsstate']==1 || empty($info['goodsstate'])}checked{/if} />
+                            <label for="emailwy41">开</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy51" name="goodsstate" value="2" {if $info['goodsstate']==2}checked{/if} />
+                            <label for="emailwy51">关</label>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">活动评论审核开关</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy71" name="activitystate" value="1" {if $info['activitystate']==1 || empty($info['activitystate'])}checked{/if} />
+                            <label for="emailwy71">开</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy81" name="activitystate" value="2" {if $info['activitystate']==2}checked{/if} />
+                            <label for="emailwy81">关</label>
+                        </label>
+                    </div>
+                </div> -->
+
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">活动报名开关</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input  type="radio" id="emailwy711" name="activityadd" value="1" {if $info['activityadd']==1 || empty($info['activityadd'])}checked{/if} />
+                            <label for="emailwy711">开</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" id="emailwy811" name="activityadd" value="2" {if $info['activityadd']==2}checked{/if} />
+                            <label for="emailwy811">关</label>
+                        </label>
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*开启后，将只有领养过羊只的用户才可报名活动！</div>
+                </div>
+
+            </div>
+      </div>
+  </div>
+        <div class="form-group">
+            <input type="submit" name="submit" value="保存设置" class="btn col-lg-3" style="color: white;background-color: #444444;margin-left: 550px;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+             <input type="hidden" name="id" value="{$info['id']}" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-7").show();
+        $("#yframe-7").addClass("wyactive");
+   
+    })
+
+
+</script>
+

@@ -1,0 +1,329 @@
+{template 'public/header'}
+{template 'public/comhead'}
+
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcss.css">
+<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp"></script>
+<script>
+var geocoder,map,defaultmarker = null,marker = null,clickmarker = null;
+var txmap = function() {
+    var coordinates = "{$info['coordinates']}";
+    var isdefault = false;
+    if(coordinates!=''){
+        var lat = "{$info['latitude']}"; //纬度
+        var lng = "{$info['longitude']}";//经度
+    }else{
+        coordinates = "39.916527,116.397128";
+        var lat = "39.916527"; //纬度
+        var lng = "116.397128";//经度
+        isdefault = true;
+        //获取城市列表接口设置中心点 IP
+        citylocation = new qq.maps.CityService({
+            complete : function(result){
+                map.setCenter(result.detail.latLng);
+                //console.log(result.detail);
+                $("#coordinates").val(result.detail.latLng);
+                $("#address").val(result.detail.name);
+                //设置marker标记
+                defaultmarker = new qq.maps.Marker({
+                    map : map,
+                    position : result.detail.latLng
+                });
+            }
+        });
+    }
+    var center = new qq.maps.LatLng(lat,lng);
+    map = new qq.maps.Map(document.getElementById('container'),{
+        center: center,
+        zoom: 15,
+    });
+    //设置marker标记
+    defaultmarker = new qq.maps.Marker({
+        map : map,
+        position : center
+    });
+    if(isdefault){
+        //调用searchLocalCity();方法    根据用户IP查询城市信息。
+        citylocation.searchLocalCity();
+    }
+    
+    //调用地址解析类
+    geocoder = new qq.maps.Geocoder({
+        complete : function(result){
+            $("#coordinates").val(result.detail.location);
+            $("#address").val(result.detail.address);
+            map.setCenter(result.detail.location);
+            if(defaultmarker){
+                defaultmarker.setMap(null);
+            }
+            if(clickmarker){
+                clickmarker.setMap(null);
+            }
+            if(marker){
+                marker.setMap(null);
+            }
+            marker = new qq.maps.Marker({
+                map:map,
+                position: result.detail.location
+            });
+
+        }
+    });
+
+    //添加监听事件   获取鼠标单击事件
+    qq.maps.event.addListener(map, 'click', function(event) {
+        //设置点击标记
+        clickmarker=new qq.maps.Marker({
+            position:event.latLng, 
+            map:map
+        });    
+        qq.maps.event.addListener(map, 'click', function(event) {
+            if(clickmarker){
+                clickmarker.setMap(null);
+            }
+            if(marker){
+                marker.setMap(null);
+            }    
+        });
+        //通过经纬度获取地址名称
+        getClickAddress(event.latLng);
+    });
+}
+
+function codeAddress() {
+    var address = document.getElementById("address").value;
+    //通过getLocation();方法获取位置信息值
+    geocoder.getLocation(address);
+}
+
+function getClickAddress(latLng){
+    geocoder.getAddress(latLng);
+}
+
+
+</script>
+<style type="text/css">
+    #weixininput{font-size: 14px;height: 33px;border-radius: 4px;border:1px solid #e7e7eb;padding-left: 10px;}
+    .searchname{font-size: 14px;color: #666;width: 220px;}
+    .searchname>a>p{color: #666;}
+</style>
+<ul class="nav nav-tabs">    
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+    <li class="active"><a href="javascript:void(0);">牧户信息</a></li>
+    <li><a href="{php echo $this->createWebUrl('store');}"><i class="fa fa-refresh"></i>返回牧户列表审核</a></li>
+</ul>
+<div class="main ygmain">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+
+            <div class="panel-heading wyheader">
+
+                商品信息
+
+            </div>
+
+            <div class="panel-body">
+                <!-- <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">虚拟牧户</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input onchange="check(this)" type="radio" id="emailwy1" name="state" value="1" {if $info['state']==1 || empty($info['state'])}checked{/if} />
+                            <label for="emailwy1">否</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input onchange="check(this)" type="radio" id="emailwy2" name="state" value="2" {if $info['state']==2}checked{/if} />
+                            <label for="emailwy2">是</label>
+                        </label>
+                    </div>
+                </div> -->
+                <div class="form-group" id='img'>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">绑定微信号</label>
+                    <div class="col-sm-9">
+                        <input type="hidden" name="bind_openid" id="bind_openid" value="{$info['bind_openid']}">
+                        <span id="wx_name" style="color: red">{if $info['name']}{$info['name']}{else}暂未绑定微信号{/if}</span><span class="btn btn-sm storeblue" data-toggle="modal" data-target="#myModal1" style="margin-left: 30px;">查找</span>
+
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                      <h4 class="modal-title" id="myModalLabel" style="font-size: 20px;">提示</h4>
+                                    </div>
+                                    <div class="modal-body ygsearch" style="font-size: 20px;padding: 15px 30px;">
+                                        <input type="text" id="weixininput" placeholder="请输入微信名称">
+                                        <span class="btn btn-sm ygbtn storeblue" id="searchgoods">查找</span>
+                                        <div class="searchname" style="margin-top: 8px;"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+
+                    </div>
+                </div>
+                
+    
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">牧户名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="storename" class="form-control" value="{$info['storename']}" />
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">牧户分类</label>
+                    <div class="col-sm-9">
+                        <select name="sc_id">
+                            <option value="">选择牧户分类</option>
+                            {loop $sclist $key $item}
+                                <option value="{$item['id']}$$${$item['sc_name']}" {if $item['id']==$info['sc_id']}selected="selected"{/if}>{$item['sc_name']}</option>
+                            {/loop}
+                        </select>
+                    </div>
+                </div> -->
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">牧龄</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="memdiscount" class="form-control" value="{$info['memdiscount']}" />
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">羊只数量（总）</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="num" class="form-control" value="{$info['num']}" />
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">排序</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="sort" class="form-control" value="{if $info['sort']}{$info['sort']}{else}255{/if}" />
+                        <div class="help-block">*越小排越前，0~255，默认255</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">联系人</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="uname" class="form-control" value="{$info['uname']}" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">联系号码</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="phone" class="form-control" value="{$info['phone']}" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">牧户地址</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="address" class="form-control" value="{$info['address']}" />
+                        <!-- <input id="address" name="address" type="textbox" value="{$info['address']}" style="height: 35px;line-height: 35px;width: 300px;"> -->
+                        <!-- <a href="javascript:void(0);" id="searchmap" style="display: inline-block;padding: 10px 30px;background: #444444;color: #fff;" onclick="codeAddress()">定位</a>
+                        <div style="color: #f00;padding: 5px 0;">地址为空时默认通过ip定位到城市中心，输入地址之后需要点击"定位"按钮进行定位</div>
+                        <div style="width: 50%;height: 400px;" id="container"></div>
+                        <div style=" padding-top: 5px;">经纬度：<input id="coordinates" name="coordinates" type="textbox" value="{$info['coordinates']}" readonly="readonly" style="height: 35px;line-height: 35px;width: 300px;"></div> -->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">牧户头像</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('logo', $info['logo']);}
+                        <span class="help-block">*建议比例 222*222</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">牧户介绍</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_ueditor('content',$info['content']);}
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*小程序仅支持文本和图片排版，复制的请清除格式之后黏贴</div>
+                </div>
+      </div>
+  </div>
+        <div class="form-group">
+
+            <input type="submit" name="submit" value="保存设置" class="btn col-lg-3" style="color: white;background-color: #444444;margin-left: 550px;"/>
+
+            <input type="hidden" name="token" value="{$_W['token']}" />
+             <input type="hidden" name="id" value="{$info['id']}" />
+
+        </div>
+
+    </form>
+
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-1").show();
+        $("#yframe-1").addClass("wyactive");
+        txmap();
+
+        $("#searchgoods").on('click',function(){
+            var name = $("#weixininput").val();
+            $.ajax({
+                type:"post",
+                url:"{php echo $this->createWebUrl('storeadd',array('op'=>'search'))}",
+                dataType:"json",
+                data:{name:name},
+                success:function(data){
+                    $(".searchname").html('');
+                    console.log(data);
+                    $(".searchname").show();
+                    for(var i=0;i<data.length;i++){
+                        $(".searchname").append('<div class="shnbox" data-dismiss="modal" id="'+data[i].openid+'" uname="'+data[i].uname+'"><a href="javascript:void(0);"><p>'+data[i].uname+'</p></a></div>')
+                    }
+                    $(".shnbox").each(function(){
+                        $(this).click(function(){
+                            var openid = $(this).attr("id");
+                            $('#bind_openid').val(openid);
+                            var uname = $(this).attr("uname");
+                            $('#wx_name').text(uname);
+                        })
+
+                    })
+                }
+            })
+        });
+    var state= $('input[name="state"]:checked').val();
+        if(state==1){
+            $('#img').show();
+            // $('.video').hide();
+        }else if(state==2){
+            $('#img').hide();
+            // $('.video').show();
+        }
+
+        
+    })
+    function check() {
+        var state= $('input[name="state"]:checked').val();
+        if(state==1){
+            $('#img').show();
+            // $('.video').hide();
+        }else if(state==2){
+            $('#img').hide();
+            // $('.video').show();
+        }
+    }
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#starttime',
+            type: 'time',
+            format: 'HH:mm'
+        });
+        laydate.render({
+            elem: '#endtime',
+            type: 'time',
+            format: 'HH:mm'
+        });
+    });
+</script>
+<style type="text/css">
+    .big-menu{overflow:inherit;}
+</style>

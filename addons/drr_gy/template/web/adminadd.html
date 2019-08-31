@@ -1,0 +1,88 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcss.css">
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+    <li><a href="{php echo $this->createWebUrl('admin')}">管理人员列表</a></li>
+    <li class="active"><a href="{php echo $this->createWebUrl('admin',array('op'=>'add'))}">添加管理人员</a></li>
+</ul>
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                添加管理人员
+            </div>
+            <div class="panel-body">
+                <div class="form-group" id='img'>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">绑定微信号</label>
+                    <div class="col-sm-9">
+                        <input type="hidden" name="uid" id="uid" value="{$info['uid']}">
+                        <span id="name" style="color: red">{if $info['name']}{$info['name']}{else}暂未绑定微信号{/if}</span><span class="btn btn-sm storeblue" data-toggle="modal" data-target="#myModal1" style="margin-left: 30px;">查找</span>
+
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                      <h4 class="modal-title" id="myModalLabel" style="font-size: 20px;">提示</h4>
+                                    </div>
+                                    <div class="modal-body ygsearch" style="font-size: 20px;padding: 15px 30px;">
+                                        <input type="text" id="weixininput" placeholder="请输入微信名称">
+                                        <span class="btn btn-sm ygbtn storeblue" id="searchgoods">查找</span>
+                                        <div class="searchname" style="margin-top: 8px;"></div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" name="submit" value="提交" class="btn col-lg-3" style="color: white;background-color: #444444;margin-left: 450px;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+            <input type="hidden" name="id" value="{$info['id']}" />
+            <input type="hidden" name="op" value="save" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-12").show();
+        $("#yframe-12").addClass("wyactive");
+
+        $("#searchgoods").on('click',function(){
+            var name = $("#weixininput").val();
+            $.ajax({
+                type:"post",
+                url:"{php echo $this->createWebUrl('admin',array('op'=>'search'))}",
+                dataType:"json",
+                data:{name:name},
+                success:function(data){
+                    $(".searchname").html('');
+                    console.log(data);
+                    $(".searchname").show();
+                    for(var i=0;i<data.length;i++){
+                        $(".searchname").append('<div class="shnbox" data-dismiss="modal" id="'+data[i].id+'" name="'+data[i].uname+'"><a href="javascript:void(0);"><p>'+data[i].uname+'</p></a></div>')
+                    }
+                    $(".shnbox").each(function(){
+                        $(this).click(function(){
+                            var uid = $(this).attr("id");
+                            $('#uid').val(uid);
+                            var name = $(this).attr("name");
+                            $('#name').text(name);
+                        })
+
+                    })
+                }
+            })
+        });
+    })
+</script>

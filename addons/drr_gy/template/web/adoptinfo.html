@@ -1,0 +1,230 @@
+{template 'public/header'}
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcss.css">
+
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+    <li  class="active"><a href="javascript:void(0);">认养添加</a></li>
+    <li><a href="{php echo $this->createWebUrl('adopt');}"><i class="fa fa-refresh"></i>返回认养列表</a></li>
+</ul>
+<div class="main ygmain">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <div class="panel panel-default ygdefault">
+            <div class="panel-heading wyheader">
+                认养添加
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">排序</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="sort" class="form-control" value="{$info['sort']}" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*0-255,根据大小，从小到大排列</div>
+
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="name" class="form-control" value="{$info['name']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养简介</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="lottery" class="form-control" value="{$info['lottery']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">项目介绍产品名称</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="proname" class="form-control" value="{$info['proname']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">产品简介</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="prolottery" class="form-control" value="{$info['prolottery']}" />
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">服务说明</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="service" class="form-control" value="{$info['service']}" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*中间以英文“,”隔开</div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所属牧户</label>
+                    <div class="col-sm-10">
+                        <select name="storeid" class="col-md-6" id="groupid">
+                            <option value="0">请选择所属牧户</option>
+                            {loop $store $row}
+                            <option name="unopction" value="{$row['id']}" {if $info['storeid']==$row['id']} selected{/if}>{$row['storename']}</option>
+                            {/loop}
+                        </select>
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*如不选择，则默认平台发布</div>
+                </div>
+
+                <div class="form-group shopprice">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养价格</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="price" class="form-control" value="{$info['price']}" style="width: 250px;" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*单位以元为计算</div>
+                </div>
+                <div class="form-group shopprice">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">限定数量</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="count" class="form-control" value="{$info['count']}" style="width: 250px;" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*每个用户所能认养的限定数量</div>
+                </div>
+                <div class="form-group shopprice">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">虚拟数量</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="vir" class="form-control" value="{$info['vir']}" style="width: 250px;" />
+                    </div>
+                </div>
+                <div class="form-group shopprice">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">截止数量</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="top" class="form-control" value="{$info['top']}" style="width: 250px;" />
+                    <div class="help-block col-sm-push-2 col-sm-12">*包含虚拟数量</div>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首页图片</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('img', $img);}
+                        <span class="help-block">*建议比例 120*120</span>
+                    </div>
+                </div>
+
+                <!-- <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">首页图片</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('img', $img);}
+                        <span class="help-block">*建议比例 120*120</span>
+                    </div>
+                </div> -->
+               
+                
+               <!--  <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">详情顶部显示</label>
+                    <div class="col-sm-10">
+                         <label class="radio-inline">
+                            <input onchange="check(this)" type="radio" id="emailwy1" name="state" value="1" {if $info['state']==1 || empty($info['state'])}checked{/if} />
+                            <label for="emailwy1">轮播图</label>
+                        </label>
+                        <label class="radio-inline">
+                            <input onchange="check(this)" type="radio" id="emailwy2" name="state" value="2" {if $info['state']==2}checked{/if} />
+                            <label for="emailwy2">视频</label>
+                        </label>
+                    </div>
+                </div> -->
+                <div class="form-group" style="width: 90%;margin-left: 15px;" id='img'>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">轮播图</label>
+                    <div class="col-sm-10">
+                        <div class="col-sm-9">
+
+                            {php echo tpl_form_field_multi_image('imgs', $imgs)}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- <div class="form-group video">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">视频封面图</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('video_img', $info['video_img']);}
+                        <span class="help-block">*建议比例 710*440</span>
+                    </div>
+                </div>
+                <div class="form-group video">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">视频</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_video('video', $info['video']);}
+                        <span class="help-block">*建议上传MP4格式，1024M以内视频</span>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">项目介绍</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_ueditor('content',$info['content']);}
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*小程序仅支持文本和图片排版，复制的请清除格式之后黏贴</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养协议标题</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="title" class="form-control" value="{$info['title']}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养标签</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="label" class="form-control" value="{$info['label']}" />
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*每个标签之间，用英文逗号“,”隔开</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养协议</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_ueditor('agreement',$info['agreement']);}
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*小程序仅支持文本和图片排版，复制的请清除格式之后黏贴</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养须知</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_ueditor('detail',$info['detail']);}
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*小程序仅支持文本和图片排版，复制的请清除格式之后黏贴</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">认养缩略图</label>
+                    <div class="col-sm-9">
+                        {php echo tpl_form_field_image('pic', $info['pic']);}
+                    </div>
+                    <div class="help-block col-sm-push-2 col-sm-12">*建议比例1：1 （180*180）</div>
+                </div>
+            </div>
+      </div>
+  </div>
+        <div class="form-group">
+            <input type="submit" name="submit" value="保存设置" class="btn col-lg-3" style="color: white;background-color: #444444;margin-left: 550px;"/>
+            <input type="hidden" name="token" value="{$_W['token']}" />
+             <input type="hidden" name="id" value="{$info['id']}" />
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $("#frame-444").show();
+        $("#yframe-444").addClass("wyactive");
+        var state= $('input[name="state"]:checked').val();
+        if(state==1){
+            $('#img').show();
+            $('.video').hide();
+        }else if(state==2){
+            $('#img').hide();
+            $('.video').show();
+        }
+
+        
+    })
+    function check() {
+        var state= $('input[name="state"]:checked').val();
+        if(state==1){
+            $('#img').show();
+            $('.video').hide();
+        }else if(state==2){
+            $('#img').hide();
+            $('.video').show();
+        }
+    }
+
+</script>
+

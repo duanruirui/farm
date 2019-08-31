@@ -1,0 +1,216 @@
+{template 'public/header'}
+
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcsslist.css">
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+ <li {if $type=='all'} class="active" {/if}><a href="{php echo $this->createWebUrl('crowd',array('type'=>all));}">全部众筹</a></li>
+ <li {if $type=='wait'} class="active" {/if}><a href="{php echo $this->createWebUrl('crowd',array('type'=>wait,'status'=>1));}">待审核</a></li>
+ <li {if $type=='ok'} class="active" {/if}><a href="{php echo $this->createWebUrl('crowd',array('type'=>ok,'status'=>2));}">已确认</a></li>
+ <li {if $type=='no'} class="active" {/if}><a href="{php echo $this->createWebUrl('crowd',array('type'=>no,'status'=>3));}">已拒绝</a></li>
+ <li {if $type=='end'} class="active" {/if}><a href="{php echo $this->createWebUrl('crowd',array('type'=>end,'status'=>4));}">已结束</a></li>
+
+</ul>
+<div class="row ygrow">
+    <div class="col-lg-12">
+        <form action="" method="get" class="col-md-4">
+        <input type="hidden" name="c" value="site" />
+            <input type="hidden" name="a" value="entry" />
+            <input type="hidden" name="m" value="lhyzhnc_sun" />
+            <input type="hidden" name="do" value="crowd" />
+            <div class="input-group">
+                <input type="text" name="keywords" class="form-control" placeholder="请输入众筹名称" value='{$op}'> 
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" name="submit" value="查找"/>
+                </span>
+            </div>
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </form>
+
+        <div class="col-md-4">
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </div>
+    </div><!-- /.col-lg-6 -->
+</div>  
+<div class="main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            众筹管理
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+                <table class="yg5_tabel col-md-12">
+                    <tr class="yg5_tr1">
+                        <!-- <td class="store_td1 col-md-1" style="text-align: center;">
+                          <input type="checkbox" class="allcheck" />
+                          <span class="store_inp">全选</span>                      
+                        </td> -->
+                        <td class="store_td1 col-md-1">ID</td>
+                        <td class="col-md-1">排序</td>
+                        <td class="col-md-1">名称</td>
+                        <td class="col-md-1">牧户</td>
+                        <td class="col-md-1">档位</td>
+                        <td class="col-md-1">已售</td>
+                        <td class="col-md-1">开始时间</td>
+                        <td class="col-md-1">结束时间</td>
+                        <td class="col-md-1">状态</td>
+                        <!-- <td class="col-md-1">链接</td> -->
+                        <td class="col-md-2">操作</td>
+                    </tr>
+                    {loop $list $key $item}
+                    <tr class="yg5_tr2">
+                        <!-- <td>
+                          <input type="checkbox" name="test" value="{$item['id']}">
+                        </td> -->
+                        <td>{$item['id']}</td>
+                        <td>{$item['sort']}</td>
+                        <td>{$item['name']}</td>
+                        <td>{$item['storename']}</td>
+                        <td> 
+                            {if $item['gearone']!=0}
+                                {$item['gearone']}
+                            {/if}
+                            
+                            {if $item['geartwo']!=0}
+                                ,{$item['geartwo']}
+                            {/if}
+                            
+                            {if $item['gearthree']!=0}
+                                ,{$item['gearthree']}
+                            {/if}
+                            
+                            {if $item['gearfour']!=0}
+                                ,{$item['gearfour']}
+                            {/if}
+                            
+                            {if $item['gearfive']!=0}
+                                ,{$item['gearfive']}
+                            {/if}
+                        </td>
+                        <td>{$item['buynum']}(虚拟：{$item['vir']})</td>
+                        <td>
+                            {if $item['status']==1||$item['status']==3}
+                                未开始
+                            {elseif $item['status']==4}
+                                已结束
+                            {else}
+                                {$item['time']}
+                            {/if}
+                        </td>
+                        <td>
+                            {if $item['status']==1||$item['status']==3}
+                                未开始
+                            {elseif $item['status']==4}
+                                已结束
+                            {else}
+                                {$item['endtime']}
+                            {/if}
+                        </td>
+
+                        <td>
+                            {if $item['status']==1}
+                                <span class="label storered">待审核</span>
+                            {elseif $item['status']==2}
+                                <span class="label storeblue">众筹中</span>
+                            {elseif $item['status']==3}
+                                <span class="label storegrey">已拒绝</span>
+                            {elseif $item['status']==4}
+                                <span class="label storegrey">已结束</span>
+                            {/if}
+                        </td>                     
+                       <!-- <td>
+                           <input type="text" style="width: 100px;" id="sclink{$item['id']}" name="link" value="lhyzhnc_sun/pages/index/crowd/crowd?id={$item['id']}">
+                           <span class="label" id="copybtn" data-clipboard-action="copy" style="color: #fff;background-color: #409e40; cursor: pointer;" data-clipboard-target="#sclink{$item['id']}">复制链接</span>
+                       </td> -->
+
+                       <td>
+                           
+                       {if $item['status']==1}
+                       <a href="{php echo $this->createWebUrl('crowd',array('op'=>'pass','id'=>$item['id']));}"><button class="btn storeblue btn-xs">开启</button></a>
+                       
+                       <a href="{php echo $this->createWebUrl('crowd',array('op'=>'nopass','id'=>$item['id']));}"><button class="btn storegrey btn-xs">关闭</button></a>
+                       {/if}
+                       {if $item['status']==2}
+                       <a href="{php echo $this->createWebUrl('crowd',array('op'=>'nopass','id'=>$item['id']));}"><button class="btn storegrey btn-xs">关闭</button></a>
+                       {/if}
+                       {if $item['status']==3}
+                       <a href="{php echo $this->createWebUrl('crowd',array('op'=>'pass','id'=>$item['id']));}"><button class="btn storeblue btn-xs">开启</button></a>
+                       {/if}
+
+                       <a href="{php echo $this->createWebUrl('crowdinfo',array('id'=>$item['id']));}" class="storespan btn btn-xs">
+                            <span class="fa fa-pencil"></span>
+                            <span class="bianji">编辑
+                                <span class="arrowdown"></span>
+                            </span>
+                        </a>
+                        <a href="javascript:void(0);" class="storespan btn btn-xs" data-toggle="modal" data-target="#myModal{$item['id']}">
+                            <span class="fa fa-trash-o"></span>
+                            <span class="bianji">删除
+                                <span class="arrowdown"></span>
+                            </span>
+                        </a>
+
+                            <!-- <a href="{php echo $this->createWebUrl('crowdinfo',array('id'=>$item['id']));}"><button class="btn btn-success btn-xs">查看</button></a>
+                           <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal{$item['id']}">删</button> -->
+                       </td>
+
+                   </tr>
+                    <div class="modal fade" id="myModal{$item['id']}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel" style="font-size: 20px;">提示</h4>
+                                </div>
+                                <div class="modal-body" style="font-size: 20px">
+                                    确定删除么？
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <a href="{php echo $this->createWebUrl('crowd', array('op' => 'delete', 'id' => $item['id']))}" type="button" class="btn btn-info" >确定</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {/loop}
+            {if empty($list)}
+            <tr class="yg5_tr2">
+                <td colspan="8">
+                      暂无商品信息
+                  </td>
+            </tr>
+          {/if}
+      </table>
+  </div>
+</div>
+</div>
+</div>
+<div class="text-right we7-margin-top">
+   {$pager}
+</div>
+<script type="text/javascript">
+    requireConfig.paths.copy2 = "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min";
+    require.config(requireConfig);
+    require(['copy2'],function(Clipboard){
+        var clipboard = new Clipboard('#copybtn');
+        clipboard.on('success', function(e) {
+            alert("复制成功");
+            console.log(e);
+        });
+        clipboard.on('error', function(e) {
+            alert("复制失败");
+            console.log(e);
+        });
+    })
+
+    $(function(){
+        $("#frame-555").show();
+        $("#yframe-555").addClass("wyactive");
+        
+        $(".allcheck").on('click',function(){
+            var checked = $(this).get(0).checked;
+            $("input[type=checkbox]").prop("checked",checked);
+        });
+    })
+</script>

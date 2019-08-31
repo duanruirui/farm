@@ -1,0 +1,216 @@
+{template 'public/header'}
+
+{template 'public/comhead'}
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcsslist.css">
+<ul class="nav nav-tabs">
+    <span class="ygxian"></span>
+    <div class="ygdangq">当前位置:</div>
+ <li {if $type=='all'} class="active" {/if}><a href="{php echo $this->createWebUrl('activity',array('type'=>all));}">全部活动</a></li>
+ <li {if $type=='wait'} class="active" {/if}><a href="{php echo $this->createWebUrl('activity',array('type'=>wait,'status'=>1));}">待审核</a></li>
+ <li {if $type=='ok'} class="active" {/if}><a href="{php echo $this->createWebUrl('activity',array('type'=>ok,'status'=>2));}">已确认</a></li>
+ <li {if $type=='no'} class="active" {/if}><a href="{php echo $this->createWebUrl('activity',array('type'=>no,'status'=>3));}">已拒绝</a></li>
+
+</ul>
+<div class="row ygrow">
+    <div class="col-lg-12">
+        <form action="" method="get" class="col-md-4">
+        <input type="hidden" name="c" value="site" />
+            <input type="hidden" name="a" value="entry" />
+            <input type="hidden" name="m" value="lhyzhnc_sun" />
+            <input type="hidden" name="do" value="activity" />
+            <div class="input-group">
+                <input type="text" name="keywords" class="form-control" placeholder="请输入活动名称" value='{$op}'> 
+                <span class="input-group-btn">
+                    <input type="submit" class="btn btn-default" name="submit" value="查找"/>
+                </span>
+            </div>
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </form>
+
+        <div class="col-md-4">
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </div>
+    </div>
+</div>  
+<div class="main">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            活动管理
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+                <table class="yg5_tabel col-md-12">
+                    <tr class="yg5_tr1">
+                        <!-- <td class="store_td1 col-md-1" style="text-align: center;">
+                          <input type="checkbox" class="allcheck" />
+                          <span class="store_inp">全选</span>                      
+                        </td> -->
+                        <td class="store_td1 col-md-1">ID</td>
+                        <td class="store_td1 col-md-1">排序</td>
+                        <td class="col-md-1">活动名称</td>
+                        <td class="col-md-1">分类</td>
+                        <td class="col-md-1">价格</td>
+                        <td class="col-md-1">已售</td>
+                        <td class="col-md-1">使用期限</td>
+                        <td class="col-md-1">首页推荐</td>
+                        <td class="col-md-1">评论</td>
+                        <td class="col-md-1">状态</td>
+                        <!-- <td class="col-md-1">链接</td> -->
+                        <td class="col-md-2">操作</td>
+                    </tr>
+                    {loop $list $key $item}
+                    <tr class="yg5_tr2">
+                        <!-- <td>
+                          <input type="checkbox" name="test" value="{$item['id']}">
+                        </td> -->
+                        <td>{$item['id']}</td>
+                        <td>{$item['sort']}</td>
+                        <td>{$item['name']}</td>
+                        <td>{$item['sc_name']}</td>
+                        <td>{$item['price']}元</td>
+                        <td>{$item['buynum']}(虚拟：{$item['vir']})</td>
+                        <td>{$item['starttime']}到{$item['endtime']}</td>
+                        <td>
+                            {if $item['isshow']==1}
+                                <span class="label storered">否</span>
+                            {elseif $item['isshow']==2}
+                                <span class="label storeblue">是</span>
+                            {/if}
+                        </td> 
+                        <td>{if $item['comment']==2}
+                          <span class="label storeblue">开启</span>
+                        {else}
+                          <span class="label storered">关闭</span>
+                        {/if}
+                        </td>
+                        <!-- <td>
+                            {if $item['isrecommend'] == 1}推荐{elseif $item['isrecommend'] == 2}不推荐{/if}
+                        </td> -->
+                        <!-- <td>{if $item['is_vip']==1}是{else}否{/if}</td> -->
+                        <!-- <td>{$item['num']}</td> -->
+                        <td>
+                            {if $item['status']==1}
+                                <span class="label storered">待审核</span>
+                            {elseif $item['status']==2}
+                                <span class="label storeblue">已通过</span>
+                            {elseif $item['status']==3}
+                                <span class="label storegrey">已拒绝</span>
+                            {/if}
+                        </td>                     
+                       <!-- <td>
+                           <input type="text" style="width: 100px;" id="sclink{$item['id']}" name="link" value="lhyzhnc_sun/pages/index/activity/activity?id={$item['id']}">
+                           <span class="label" id="copybtn" data-clipboard-action="copy" style="color: #fff;background-color: #409e40; cursor: pointer;" data-clipboard-target="#sclink{$item['id']}">复制链接</span>
+                       </td> -->
+
+                       <td>
+                           
+                       <!-- {if $item['status']==1}
+                       <a href="{php echo $this->createWebUrl('activity',array('op'=>'pass','id'=>$item['id']));}"><button class="btn storeblue btn-xs">通过</button></a>
+                       <a href="{php echo $this->createWebUrl('activity',array('op'=>'nopass','id'=>$item['id']));}"><button class="btn storegrey btn-xs">拒绝</button></a>
+                       {/if} -->
+                       <!-- {if $item['isrecommend']==1}
+                        <a href="{php echo $this->createWebUrl('activity',array('op'=>'pass1','id'=>$item['id']));}"><button class="btn storeblue btn-xs">设置最新</button></a>
+                       {else}
+                      <a href="{php echo $this->createWebUrl('activity',array('op'=>'nopass1','id'=>$item['id']));}"><button class="btn storegrey btn-xs">取消最新</button></a>
+                       {/if} -->
+                       
+                       {if $item['status']==1}
+                       <a href="{php echo $this->createWebUrl('activity',array('op'=>'pass','id'=>$item['id'],'cid'=>$item['cid']));}"><button class="btn storeblue btn-xs">通过</button></a>
+                       <a href="{php echo $this->createWebUrl('activity',array('op'=>'nopass','id'=>$item['id']));}"><button class="btn storegrey btn-xs">拒绝</button></a>
+                       {/if}
+                       {if $item['status']==2}
+
+                          {if $item['isshow']==1}
+                            <a href="{php echo $this->createWebUrl('activity',array('op'=>'pass3','id'=>$item['id']));}"><button class="btn storeblue btn-xs">首页推荐</button></a>
+                           {else}
+                          <a href="{php echo $this->createWebUrl('activity',array('op'=>'nopass3','id'=>$item['id']));}"><button class="btn storegrey btn-xs">取消推荐</button></a>
+                           {/if}
+                           {if $item['comment']==1}
+                            <a href="{php echo $this->createWebUrl('activity',array('op'=>'pass2','id'=>$item['id']));}"><button class="btn storeblue btn-xs">开启评论</button></a>
+                           {else}
+                            <a href="{php echo $this->createWebUrl('activity',array('op'=>'nopass2','id'=>$item['id']));}"><button class="btn storegrey btn-xs">关闭评论</button></a>
+                           {/if}
+                        <a href="{php echo $this->createWebUrl('activityping',array('op'=>activityping,'id'=>$item['id']));}"><button class="btn btn-success btn-xs">查看评论</button></a>
+                           
+                        <a href="{php echo $this->createWebUrl('activity',array('op'=>'nopass','id'=>$item['id']));}"><button class="btn storegrey btn-xs">拒绝</button></a>
+                        {/if}
+                       {if $item['status']==3}
+                        <a href="{php echo $this->createWebUrl('activity',array('op'=>'pass','id'=>$item['id'],'cid'=>$item['cid']));}"><button class="btn storeblue btn-xs">通过</button></a>
+                        {/if}
+                        
+                       <a href="{php echo $this->createWebUrl('activityinfo',array('id'=>$item['id']));}" class="storespan btn btn-xs">
+                            <span class="fa fa-pencil"></span>
+                            <span class="bianji">编辑
+                                <span class="arrowdown"></span>
+                            </span>
+                        </a>
+                        <a href="javascript:void(0);" class="storespan btn btn-xs" data-toggle="modal" data-target="#myModal{$item['id']}">
+                            <span class="fa fa-trash-o"></span>
+                            <span class="bianji">删除
+                                <span class="arrowdown"></span>
+                            </span>
+                        </a>
+
+                            <!-- <a href="{php echo $this->createWebUrl('activityinfo',array('id'=>$item['id']));}"><button class="btn btn-success btn-xs">查看</button></a>
+                           <button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal{$item['id']}">删</button> -->
+                       </td>
+
+                   </tr>
+                   <div class="modal fade" id="myModal{$item['id']}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel" style="font-size: 20px;">提示</h4>
+                        </div>
+                        <div class="modal-body" style="font-size: 20px">
+                            确定删除么？
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <a href="{php echo $this->createWebUrl('activity', array('op' => 'delete', 'id' => $item['id']))}" type="button" class="btn btn-info" >确定</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/loop}
+            {if empty($list)}
+            <tr class="yg5_tr2">
+                <td colspan="8">
+                      暂无商品信息
+                  </td>
+            </tr>
+          {/if}
+      </table>
+  </div>
+</div>
+</div>
+</div>
+<div class="text-right we7-margin-top">
+   {$pager}
+</div>
+<script type="text/javascript">
+    requireConfig.paths.copy2 = "https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min";
+    require.config(requireConfig);
+    require(['copy2'],function(Clipboard){
+        var clipboard = new Clipboard('#copybtn');
+        clipboard.on('success', function(e) {
+            alert("复制成功");
+            console.log(e);
+        });
+        clipboard.on('error', function(e) {
+            alert("复制失败");
+            console.log(e);
+        });
+    })
+
+    $(function(){
+        $("#frame-3333").show();
+        $("#yframe-3333").addClass("wyactive");
+        
+        $(".allcheck").on('click',function(){
+            var checked = $(this).get(0).checked;
+            $("input[type=checkbox]").prop("checked",checked);
+        });
+    })
+</script>

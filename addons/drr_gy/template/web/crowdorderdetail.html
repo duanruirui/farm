@@ -1,0 +1,142 @@
+{template 'public/header'}
+
+{template 'public/comhead'}
+<link href="../addons/lhyzhnc_sun/template/public/zoomify.min.css" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcsslist.css">
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/zoomify.min.css">
+
+<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcss.css">
+
+<div class="fiters" style="position:fixed;top:0;left:0;background:#ccc;opacity:0.5;width:100%;height:100%;z-index:20;display:none;pointer-events: none;"></div>
+
+<div class="main">
+    <!-- <div class="panel panel-default"> -->
+        <!-- <div class="panel-body ygbtn eygbtn">
+            <div class="btn ygshouqian2 " id="allsc">批量生成二维码</div>
+        </div>   -->      
+    <!-- </div> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            众筹项目：{$crowd['name']}
+        </div>
+        <div class="panel-body" style="padding: 0px 15px;">
+            <div class="row">
+                <table class="yg5_tabel col-md-12">
+                    <tr class="yg5_tr1">
+                        <!-- <td class="store_td1 col-md-1" style="text-align: center;">
+                            <input type="checkbox" class="allcheck" />
+                            <span class="store_inp">全选</span>
+                        </td> -->
+                         <!-- <td class="store_td1 col-md-1">id</td> -->
+                         <td class="col-md-1">订单号</td>
+                        <td class="col-md-1">耳标号</td>
+                      	<td class="col-md-1">二维码</td>
+                        <td class="col-md-1">牧户</td>
+
+                    </tr>
+                    {loop $list $key $item}
+                    <tr class="yg5_tr2">
+                        <!-- <td>
+                            <input type="checkbox" name="test" value="{$item['ear']}">
+                        </td> -->
+                        <!-- <td>{$item['id']}</td> -->
+                       	<td>{$item['ordernum']}</td>
+                        <td>{$item['ear']}</td>
+                        <!-- <td>{$item['erweima']}</td> -->
+                        <td>
+                        {if empty($item['erweima'])}
+                            <a class="creatqr" data-ear="{$item['ear']}"  data-ordernum="{$ordernum}"><button class="btn storeblue btn-xs">生成二维码</button></a>
+                        {else}
+                            <!-- <img style='height:100px'  src="{$item['erweima']}"> -->
+                            <img src="{$_W['attachurl']}{$item['erweima']}" width="50" height="50">
+    <!-- {$_W['attachurl']}{$item['erweima']} -->
+                            <!-- {$item['erweima']} -->
+                        {/if}
+                            
+                        </td>
+                        <td>{$item['storename']}</td>
+                        
+                        
+
+                        
+                    </tr>
+
+                    {/loop}
+                    {if empty($list)}
+                    <tr class="yg5_tr2">
+                        <td colspan="11">
+                            暂无信息
+                        </td>
+                    </tr>
+                    {/if}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-right we7-margin-top">
+    {$pager}
+</div>
+<script src="../addons/yzcj_sun/template/public/zoomify.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        //图片点击放大
+        $('.yg5_tr2 img').zoomify();
+        
+        $("#frame-1111").show();
+        $("#yframe-1111").addClass("wyactive");
+        $(".creatqr").on('click',function(){
+            // var check = $("input[type=checkbox][class!=allcheck]:checked");
+                var ear = $(this).attr("data-ear");
+                var ordernum = $(this).attr("data-ordernum");
+                // alert(ear);
+
+                // id = $(this).val();
+
+                // console.log(name)
+                // console.log($(this))
+                $.ajax({
+                    type:"post",
+                    url:"{php echo $this->createWebUrl('crowdorderdetail',array('op'=>'sc'));}"+"&ear="+ear+"&ordernum="+ordernum,
+                    dataType:"text",
+                    // data:{id:id},
+                    success:function(data){
+                        console.log(data);
+                        location.reload();
+                    }
+                })
+        });
+        $("#allsc").on('click',function(){
+            var check = $("input[type=checkbox][class!=allcheck]:checked");
+            if(check.length < 1){
+                alert('请选择要生成二维码的羊只!');
+                return false;
+            }else if(confirm("确认要生成二维码?")){
+                var ear = new Array();
+                check.each(function(i){
+                    ear[i] = $(this).val();
+                });
+                console.log(ear)
+                $.ajax({
+                    type:"post",
+                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=allsc&m=lhyzhnc_sun",
+                    dataType:"text",
+                    data:{ear:ear},
+                    success:function(data){
+                        console.log(data);
+                        location.reload();
+                    }
+                })
+
+            }
+        });
+
+        $(".allcheck").on('click',function(){
+            var checked = $(this).get(0).checked;
+            $("input[type=checkbox]").prop("checked",checked);
+        });
+    })
+</script>
+  
