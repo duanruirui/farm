@@ -85,7 +85,7 @@ if($_GPC['op']=='refund'){
     //获取订单信息
     $order = pdo_get('lhyzhnc_sun_activityorder',array('uniacid'=>$uniacid,'id'=>$id),array("price","out_trade_no","out_refund_no","aid"));
     //退款操作
-    include_once IA_ROOT . '/addons/lhyzhnc_sun/cert/WxPay.Api.php';
+    include_once IA_ROOT . '/addons/drr_gy/cert/WxPay.Api.php';
     load()->model('account');
     load()->func('communication');
     //获取appid和appkey

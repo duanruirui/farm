@@ -1,10 +1,10 @@
 {template 'public/header'}
 
 {template 'public/comhead'}
-<link href="../addons/lhyzhnc_sun/template/public/zoomify.min.css" rel="stylesheet">
+<link href="../addons/drr_gy/template/public/zoomify.min.css" rel="stylesheet">
 
-<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcsslist.css">
-<link rel="stylesheet" type="text/css" href="../addons/lhyzhnc_sun/template/public/ygcss.css">
+<link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/public/ygcsslist.css">
+<link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/public/ygcss.css">
 
 <div class="fiters" style="position:fixed;top:0;left:0;background:#ccc;opacity:0.5;width:100%;height:100%;z-index:20;display:none;pointer-events: none;"></div>
 <ul class="nav nav-tabs">
@@ -22,7 +22,7 @@
         <form action="" method="get" class="col-md-4">
         <input type="hidden" name="c" value="site" />
             <input type="hidden" name="a" value="entry" />
-            <input type="hidden" name="m" value="lhyzhnc_sun" />
+            <input type="hidden" name="m" value="drr_gy" />
             <input type="hidden" name="do" value="activityping" />
             <input type="hidden" name="id" value={$aid} />
             <div class="input-group">
@@ -163,7 +163,7 @@
     {$pager}
 </div>
 
-<script src="../addons/lhyzhnc_sun/template/public/zoomify.min.js"></script> 
+<script src="../addons/drr_gy/template/public/zoomify.min.js"></script> 
 <script type="text/javascript">
     $(function(){
         
@@ -182,7 +182,7 @@
                 console.log(id)
                 $.ajax({
                     type:"post",
-                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=AlldeleteCar&m=lhyzhnc_sun",
+                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=AlldeleteCar&m=drr_gy",
                     dataType:"text",
                     data:{id:id},
                     success:function(data){
@@ -208,7 +208,7 @@
                 console.log(id)
                 $.ajax({
                     type:"post",
-                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=AdoptCar&m=lhyzhnc_sun",
+                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=AdoptCar&m=drr_gy",
                     dataType:"text",
                     data:{id:id},
                     success:function(data){
@@ -233,7 +233,7 @@
                 console.log(id)
                 $.ajax({
                     type:"post",
-                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=RejectCar&m=lhyzhnc_sun",
+                    url:"{$_W['siteroot']}/app/index.php?i={$_W['uniacid']}&c=entry&do=RejectCar&m=drr_gy",
                     dataType:"text",
                     data:{id:id},
                     success:function(data){

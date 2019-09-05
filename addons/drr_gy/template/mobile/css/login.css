@@ -1,0 +1,45 @@
+body{
+	background-color: #1E90FF;
+}
+/***********************powered by duanruirui***********************/
+.login_container .logo{
+	margin:0 auto;
+	width: 100%;
+	text-align: center;
+}
+.logo img{
+	margin-top: 3rem;
+	width: 15rem;
+}
+.login {
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+}
+.login form {
+	margin: 0 auto;
+	margin-top:10%;
+	width: 100%;
+	text-align: center;
+}
+.login form input{
+	margin: 0 auto;
+	margin-top:1rem;
+	width: 50%;
+	text-align: center;
+	font-size: 2rem;
+}
+.addtion {
+	margin: 0 auto;
+	margin-top: 1rem;
+	width: 100%;
+	text-align: center;
+}
+.addtion a{
+	float: left;
+	margin: 0 auto;
+	text-align: center;
+	width: 50%;
+	text-decoration:none;
+	color:white; 
+}

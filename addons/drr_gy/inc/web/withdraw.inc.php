@@ -17,7 +17,7 @@ if($_GPC['op']=='delete'){
     //获取商家
     // $brand = pdo_get('lhyzhnc_sun_brand',array('uniacid'=>$uniacid,'bid'=>$withdraw["bid"]),array("commission","totalamount","frozenamount","bname"));
     if($withdraw["wd_type"]==1){//微信直接打款
-        include IA_ROOT . '/addons/lhyzhnc_sun/wxfirmpay.php';
+        include IA_ROOT . '/addons/drr_gy/wxfirmpay.php';
         $appData = pdo_get('lhyzhnc_sun_system', array('uniacid' => $uniacid));
         $mch_appid = $appData['appid'];
         $mchid = $appData['mchid'];

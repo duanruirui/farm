@@ -304,7 +304,7 @@ class Drr_gyModuleSite extends Core {
         $matrixPointSize = 10;      
         //生成图片大小  
         //生成二维码图片 
-        // $filename = IA_ROOT.'/addons/lhyzhnc_sun/template/images/qrcode.png';  
+        // $filename = IA_ROOT.'/addons/drr_gy/template/images/qrcode.png';  
         $filename = "../attachment/qrcode.png";  
 
         
@@ -318,8 +318,8 @@ class Drr_gyModuleSite extends Core {
         imagecolortransparent($im,$white);  //imagecolortransparent() 设置具体某种颜色为透明色，若注释
         $black = imagecolorallocate($im,0x00,0x00,0x00);
          
-        imagettftext($im,30,0,18,290,$black,IA_ROOT.'/addons/lhyzhnc_sun/font/simkai.ttf',$str); //字体设置部分linux和windows的路径可能不同
-        // $filename1 = IA_ROOT.'/addons/lhyzhnc_sun/template/images/im.png';
+        imagettftext($im,30,0,18,290,$black,IA_ROOT.'/addons/drr_gy/font/simkai.ttf',$str); //字体设置部分linux和windows的路径可能不同
+        // $filename1 = IA_ROOT.'/addons/drr_gy/template/images/im.png';
         $filename1 = "../attachment/im.jpg";  
 
         imagejpeg($im,$filename1);//文字生成的图片
@@ -423,7 +423,7 @@ class Drr_gyModuleSite extends Core {
         $textWidth = $fontWidth * mb_strlen ( $str );
         $x = ceil ( ($width - $textWidth) / 3 );//计算文字的水平位置
 
-        imagettftext($im,$fontSize,0,$x,460,$black,IA_ROOT.'/addons/lhyzhnc_sun/font/simkai.ttf',$str); //字体设置部分linux和windows的路径可能不同
+        imagettftext($im,$fontSize,0,$x,460,$black,IA_ROOT.'/addons/drr_gy/font/simkai.ttf',$str); //字体设置部分linux和windows的路径可能不同
         $filename1 = "../attachment/im1.jpg";  
         //header('Content-Type: image/png');//发送头信息
 
@@ -459,7 +459,7 @@ class Drr_gyModuleSite extends Core {
         $matrixPointSize = 10;      
         //生成图片大小  
         //生成二维码图片 
-        // $filename = IA_ROOT.'/addons/lhyzhnc_sun/template/images/qrcode.png';  
+        // $filename = IA_ROOT.'/addons/drr_gy/template/images/qrcode.png';  
         $filename = "../attachment/qrcode.png";  
 
         
@@ -473,7 +473,7 @@ class Drr_gyModuleSite extends Core {
         imagecolortransparent($im,$white);  //imagecolortransparent() 设置具体某种颜色为透明色，若注释
         $black = imagecolorallocate($im,0x00,0x00,0x00);
          
-        imagettftext($im,30,0,18,290,$black,IA_ROOT.'/addons/lhyzhnc_sun/font/simkai.ttf',$str); //字体设置部分linux和windows的路径可能不同
+        imagettftext($im,30,0,18,290,$black,IA_ROOT.'/addons/drr_gy/font/simkai.ttf',$str); //字体设置部分linux和windows的路径可能不同
         $filename1 = "../attachment/im.jpg";  
 
         imagejpeg($im,$filename1);//文字生成的图片

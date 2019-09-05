@@ -13,7 +13,7 @@
     .yg9_content>li:nth-child(1)>.col-md-12{
         background-color: #32CC7F;
         color: white;
-        /*background:url(../addons/lhyzhnc_sun/template/images/tuceng4.png) no-repeat center;
+        /*background:url(../addons/drr_gy/template/images/tuceng4.png) no-repeat center;
         background-size: 100%;*/
     }
     .yg9_content>li:nth-child(2)>.col-md-12{
@@ -139,7 +139,7 @@
             <div class="col-md-12 vipbox">
                 <div class="col-md-12 vipcontent">
                     <div class="vipleft">
-                        <img src="../addons/lhyzhnc_sun/template/images/ygrz.png">
+                        <img src="../addons/drr_gy/template/images/ygrz.png">
                         <span>会员信息</span>
                     </div>
                     <div class="vipright">(单位：人)</div>
@@ -168,7 +168,7 @@
             <div class="col-md-12 vipbox">
                 <div class="col-md-12 vipcontent">
                     <div class="vipleft">
-                        <img src="../addons/lhyzhnc_sun/template/images/6.png">
+                        <img src="../addons/drr_gy/template/images/6.png">
                         <span>产品订单一览</span>
                     </div>
                     <div class="vipright">(单位：件)</div>
@@ -207,7 +207,7 @@
             <div class="col-md-12 vipbox">
                 <div class="col-md-12 vipcontent">
                     <div class="vipleft">
-                        <img src="../addons/lhyzhnc_sun/template/images/6.png">
+                        <img src="../addons/drr_gy/template/images/6.png">
                         <span>活动订单一览</span>
                     </div>
                     <div class="vipright">(单位：次)</div>
@@ -234,7 +234,7 @@
             <div class="col-md-12 vipbox">
                 <div class="col-md-12 vipcontent">
                     <div class="vipleft">
-                        <img src="../addons/lhyzhnc_sun/template/images/6.png">
+                        <img src="../addons/drr_gy/template/images/6.png">
                         <span>众筹订单一览</span>
                     </div>
                     <div class="vipright">(单位：件)</div>
@@ -265,7 +265,7 @@
             <div class="col-md-12 vipbox">
                 <div class="col-md-12 vipcontent">
                     <div class="vipleft">
-                        <img src="../addons/lhyzhnc_sun/template/images/6.png">
+                        <img src="../addons/drr_gy/template/images/6.png">
                         <span>认养订单一览</span>
                     </div>
                     <div class="vipright">(单位：件)</div>

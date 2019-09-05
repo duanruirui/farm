@@ -219,7 +219,7 @@
 <?php  $res=pdo_get('lhyzhnc_sun_system',array('uniacid'=>$_W['uniacid']))?>
 <div class="header">
     <div class="wheaderbox">
-        <img class="header_logo" src="<?php  if($res['link_logo']) { ?><?php  echo tomedia($res['link_logo'])?><?php  } else { ?>../addons/lhyzhnc_sun/template/images/yuanxing.png<?php  } ?>" alt=""/>
+        <img class="header_logo" src="<?php  if($res['link_logo']) { ?><?php  echo tomedia($res['link_logo'])?><?php  } else { ?>../addons/drr_gy/template/images/yuanxing.png<?php  } ?>" alt=""/>
     	<span class="header_title">
     		<?php  if($res['link_name']) { ?><?php  echo $res['link_name'];?><?php  } else { ?>管理系统<?php  } ?>
 		</span>    	
@@ -248,7 +248,7 @@
         </li> 
         <?php  } ?>       
         <!-- <li>
-            <img src="../addons/lhyzhnc_sun/template/images/tongzhi.png" width="15px" height="18px" alt=""/>
+            <img src="../addons/drr_gy/template/images/tongzhi.png" width="15px" height="18px" alt=""/>
         </li> -->
         <li>
             <a href="<?php  echo url('user/logout');?>" class="yyhome">
@@ -299,7 +299,7 @@
 					<!-- <div class="panel panel-default" style="padding-bottom: 10px;padding-top: 5px;">
 						<span style="width:13.3333337%; height:160px;display: table-cell; line-height:160px; vertical-align:middle;text-align: center;padding-top: 5px;">
 							<img style="display: inline-block;width: 160px;height: 160px;
-box-sizing: border-box;margin-top:10px;padding: 10px;border: 1px solid #f2f2f2;box-sizing: border-box;max-width: 100%;" alt="image" src="<?php  echo tomedia($cur_store['md_logo'])?>" onerror="this.src='../addons/lhyzhnc_sun/template/images/logo.png';"/>
+box-sizing: border-box;margin-top:10px;padding: 10px;border: 1px solid #f2f2f2;box-sizing: border-box;max-width: 100%;" alt="image" src="<?php  echo tomedia($cur_store['md_logo'])?>" onerror="this.src='../addons/drr_gy/template/images/logo.png';"/>
 						</span>
 						<a href="#" >
 							<span style="text-align:center;margin-top: 8px;" class="block m-t-xs"><strong class="font-bold"><?php  echo $cur_store['md_name'];?></strong></span>

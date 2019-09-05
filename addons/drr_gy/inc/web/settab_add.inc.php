@@ -2,7 +2,7 @@
 global $_GPC, $_W;
 $GLOBALS['frames'] = $this->getMainMenu();
 //调用
-// include IA_ROOT . '/addons/lhyzhnc_sun/inc/func/func.php';
+// include IA_ROOT . '/addons/drr_gy/inc/func/func.php';
 $template = "web/settab_add";
 // $typearr = GetPositon();
 // $typearr_noinput = GetNoShowinput();
