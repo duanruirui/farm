@@ -27,17 +27,17 @@
     			</a>
     		</li>
     		<li>
-    			<a href="">
+    			<a href="<?php  echo $this->createMobileUrl('user_center', array('op' => 'index'))?>">
 	    			<dl>
 	    				<dt><img src="/addons/drr_gy/template/mobile/images/add/icon07.png"></dt>
 	    				<dd>个人中心</dd>
 	    			</dl>    				
     			</a>
     		</li>
-    		<li>
+<!--     		<li>
     			<a href="">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/hhr.png"></dt>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/dengji.png"></dt>
 	    				<dd>果农等级</dd>
 	    			</dl>    				
     			</a>
@@ -45,7 +45,7 @@
     		<li>
     			<a href="">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/hhr.png"></dt>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/buyotherplus.png"></dt>
 	    				<dd>果树复购</dd>
 	    			</dl>    				
     			</a>
@@ -53,15 +53,15 @@
     		<li>
     			<a href="">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/hhr.png"></dt>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/profit01.png"></dt>
 	    				<dd>累计收益</dd>
 	    			</dl>    				
     			</a>
-    		</li>
+    		</li> -->
     		<li>
     			<a href="">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/hhr.png"></dt>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/localsee.png"></dt>
 	    				<dd>果园监控</dd>
 	    			</dl>    				
     			</a>
@@ -69,7 +69,7 @@
     		<li>
     			<a href="">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/hhr.png"></dt>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/activity.png"></dt>
 	    				<dd>活动报名</dd>
 	    			</dl>    				
     			</a>
@@ -81,15 +81,16 @@
     	<div class="goods-list">
     		<div class="list-title">认养果树列表</div>
     		<ul>
-    			<?php  if(is_array($crowds)) { foreach($crowds as $crowd) { ?>
+    			<?php  if(is_array($adopts)) { foreach($adopts as $adopt) { ?>
     			<li>
     				<dl>
     					<dt>
-    						<img src="/attachment/<?php  echo $crowd['pic'];?>">
+    						<img src="/attachment/<?php  echo $adopt['pic'];?>">
     					</dt>
     					<dd>
-							<span class="goods_info"><?php  echo $crowd['name'];?></span><br>
-							<img src="/addons/drr_gy/template/mobile/images/add/icon11.png">
+							<span class="goods_info"><?php  echo $adopt['name'];?></span><br>
+							<span class="goods_price">￥<?php  echo $adopt['price'];?></span>
+							<img src="/addons/drr_gy/template/mobile/images/index/cart.png">
     					</dd>
     				</dl>
     			</li>
@@ -98,16 +99,19 @@
 
     		<div class="list-title">众筹列表</div>
     		<ul>
+    			<?php  if(is_array($crowds)) { foreach($crowds as $crowd) { ?>
     			<li>
     				<dl>
     					<dt>
-    						<img src="/addons/drr_gy/template/mobile/images/hhr.png">
+    						<img src="/attachment/<?php  echo $crowd['pic'];?>">
     					</dt>
     					<dd>
-							<span class="goods_info">果苗一棵</span><br>
+							<span class="goods_info"><?php  echo $crowd['name'];?></span><br>
+							<img src="/addons/drr_gy/template/mobile/images/index/cart.png">
     					</dd>
     				</dl>
     			</li>
+    			<?php  } } ?>
     		</ul>
 
     		<div class="list-title">商品列表</div>
@@ -121,7 +125,7 @@
     					<dd>
 							<span class="goods_info"><?php  echo $goods['gname'];?></span><br>
 							<span class="goods_price">￥<?php  echo $goods['price'];?></span>
-							<img src="/addons/drr_gy/template/mobile/images/add/icon11.png">
+							<img src="/addons/drr_gy/template/mobile/images/index/me (2).png">
     					</dd>
     				</dl>
     			</li>
@@ -133,36 +137,7 @@
     	
     </div>
 
-    <div class="footer">
-    	<ul>
-    		<li>
-    			<dl>
-    				<dt><img src="/addons/drr_gy/template/mobile/images/indexIconS.png"></dt>
-    				<dd>首页</dd>
-    			</dl>
-    		</li>
-    		<li>
-    			<dl>
-    				<dt><img src="/addons/drr_gy/template/mobile/images/user.png"></dt>
-    				<dd>认养</dd>
-    			</dl>
-    		</li>
-    		<li>
-    			<dl>
-    				<dt><img src="/addons/drr_gy/template/mobile/images/indexIcon.png"></dt>
-    				<dd>众筹</dd>
-    			</dl>
-    		</li>
-    		<li>
-    			<dl>
-    				<dt><img src="/addons/drr_gy/template/mobile/images/indexMy.png"></dt>
-    				<dd>我</dd>
-    			</dl>
-    		</li>
-    	</ul>
-    </div>
-
-	<a href="<?php  echo $this->createMobileUrl('index', array('op' => 'login'))?>">登录模块</a>
+	<?php (!empty($this) && $this instanceof WeModuleSite) ? (include $this->template('footer', TEMPLATE_INCLUDEPATH)) : (include template('footer', TEMPLATE_INCLUDEPATH));?>
 
 <script>;</script><script type="text/javascript" src="http://farm.com/app/index.php?i=1&c=utility&a=visit&do=showjs&m=drr_gy"></script></body>
 <script type="text/javascript" src="../addons/drr_gy/template/mobile/js/index.js"></script>

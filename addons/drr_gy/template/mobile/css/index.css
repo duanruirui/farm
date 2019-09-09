@@ -1,3 +1,6 @@
+body{
+    background-color: #f8f8f8;
+}
 .banner {
     width: 100%;
     height:200px;
@@ -31,9 +34,16 @@
     width: 80%;
     float:left;
 }
+.message-right a{
+    text-decoration:none;
+    color: black;
+}
+
 .menue_button ul{
+    background-color: white;
     width:100%;
     margin: 0 auto;
+    margin-top:1rem;
     padding: 0;
     text-align: center;
     overflow: hidden;
@@ -46,7 +56,10 @@
     text-decoration: none;
     list-style:none;
 }
-
+.menue_button ul li a{
+    text-decoration:none;
+    color: black;
+}
 .menue_button ul li dl{
     width:100%;
     text-align: center;
@@ -72,8 +85,10 @@
     width:100%;
     margin: 0 auto;
     padding: 0;
+    margin-top: 1rem; 
     text-align: center;
     overflow: hidden;
+    background-color: white;
 }
 .list-title{
     color: green;
@@ -87,6 +102,7 @@
     overflow: hidden;
     text-decoration: none;
     list-style:none;
+    background-color: white;
 }
 .goods-list ul li{
     width: 50%;
@@ -123,48 +139,4 @@
 .goods_price{
     font-size: 2rem;
     color: red;
-}
-.footer{
-    box-sizing: border-box;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    z-index: 998;
-}
-.footer ul{
-    width: 100%;
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-    overflow: hidden;
-    text-decoration: none;
-    list-style:none;
-    border-top:solid gray 1px;
-}
-.footer ul li{
-    width:25%;
-    float: left;
-}
-.footer ul li dl{
-    width:100%;
-    text-align: center;
-    overflow: hidden;
-}
-.footer ul li dl dt{
-    width:100%;
-    text-align: center;
-    overflow: hidden;
-}
-.footer ul li dl dt img{
-    width: 3rem;
-    height: 3rem;
-}
-.footer ul li dl dd{
-    width:100%;
-    margin: 0 auto;
-    padding: 0;
-    text-align: center;
-    overflow: hidden;
-    font-size: 1.5rem;
 }

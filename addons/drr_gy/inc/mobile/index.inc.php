@@ -1,11 +1,11 @@
 <?php
-global $_W,$_GPC;
 
-if (isset($_GPC['op'])) {
+if (isset($_GET['op'])) {
 
-	switch ($_GPC['op']) {
+	switch ($_GET['op']) {
 		case 'login':
-			if (isset($_W['openid'])) {
+			session_start();
+			if (isset($_SESSION['openid'])) {
 				# code...
 			}else{
 				Mobile::login();
@@ -37,7 +37,6 @@ class Mobile extends WeBase{
     **/
     public function index(){
 
-    	global $_W,$_GPC;
 
     	$banners = pdo_getall('ims_lhyzhnc_sun_popbanner');
 
@@ -46,6 +45,8 @@ class Mobile extends WeBase{
     	$goods = pdo_fetchall('select * from ims_lhyzhnc_sun_goods where cid=:cid order by id desc',array('cid'=>1));
 
     	$crowds = pdo_fetchall('select * from ims_lhyzhnc_sun_crowd order by id desc');
+
+    	$adopts = pdo_fetchall('select * from ims_lhyzhnc_sun_adopt order by id desc');
 
     	$activities = pdo_fetchall('select * from ims_lhyzhnc_sun_activity');
 
@@ -66,12 +67,22 @@ class Mobile extends WeBase{
     ****/
     public function login(){
 
-    	global $_W,$_GPC;
+        if(isset($_SESSION['app_user_login'])) {
 
-        if(isset($_W['app_user_login'])) {
 
-        	include self::template('index');die;
+        	if(isset($_SESSION['before_login'])){
+        		//0.5s后跳转
+				echo "<meta http-equiv=\"refresh\" content=\"0.5;url=".$_SESSION['before_login']."\">";
 
+				session_commit();
+				die;
+
+        	}else{
+
+        		session_commit();
+        		include self::template('index');
+        		die;
+        	}
         }
     	
         if(isset($_POST['handle_type'])) {
@@ -118,15 +129,26 @@ class Mobile extends WeBase{
 
 		if (!empty($result)) {
 
-			$_W['app_user_login'] = $result;
+			$_SESSION['app_user_login'] = $result;
 
-			include self::template('index');die;
+			if(isset($_SESSION['before_login'])){
+        		//0.5s后跳转
+				echo "<meta http-equiv=\"refresh\" content=\"0.5;url=".$_SESSION['before_login']."\">";
+
+        	}else{
+        		include self::template('index');
+        	}
+
+			session_commit();
+			die;
 			
 		}else{
 
 			$login_error = '用户名或密码错误';
 
-			include self::template('login');die;
+			include self::template('login');
+			session_commit();
+			die;
 
 		}
     	
@@ -139,21 +161,25 @@ class Mobile extends WeBase{
     **/
     private function register($telphone,$password){
 
-    	global $_W,$_GPC;
+    	if (isset($_SESSION['openid'])) {
 
-    	if (isset($_W['openid'])) {
-
-    		pdo_update('lhyzhnc_sun_user',array('telphone'=>$telphone,'password'=>$password),array('openid'=>$_W['openid']));
-
-    		include self::template('index');die;
+    		pdo_update('lhyzhnc_sun_user',array('telphone'=>$telphone,'password'=>$password),array('openid'=>$_SESSION['openid']));
 
     	}else{
 
     		pdo_insert('lhyzhnc_sun_user',array('telphone'=>$telphone,'password'=>$password));
 
-    		include self::template('index');die;
+    		if(isset($_W['before_login'])){
+        		//0.5s后跳转
+				echo "<meta http-equiv=\"refresh\" content=\"0.5;url=".$_SESSION['before_login']."\">";
+				die;
+
+        	}
 
     	}
+    	include self::template('index');
+    	session_commit();
+    	die;
 
     }
 
@@ -162,8 +188,6 @@ class Mobile extends WeBase{
     *function description 注册新用户检查用户名重复 
     **/
     private function check_register_telphone($telphone){
-
-    	global $_W,$_GPC;
 
     	$userexists = pdo_get('lhyzhnc_sun_user',array('telphone'=>$telphone));
 
@@ -183,8 +207,6 @@ class Mobile extends WeBase{
     *function description 忘记密码修改 
     **/
     private function password_reset($telphone,$password){
-
-    	global $_W,$_GPC;
 
 		pdo_update('lhyzhnc_sun_user', array('password'=>$password) ,array('telphone'=>$telphone));
 
