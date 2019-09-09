@@ -1,0 +1,32 @@
+.profile{
+	width:100%;
+	overflow: hidden;
+	/*border-bottom: solid gray 1px;*/
+}
+.profile_left{
+	width:30%;
+	float: left;
+	overflow: hidden;
+	text-align: center;
+}
+.profile_left img{
+	width: 10rem;
+}
+.profile_right{
+	font-size: 2rem;
+	float: left;
+	width:70%;
+	padding-top: 3rem;
+}
+.menue{
+	width: 100%;
+	overflow: hidden;
+}
+.menue ul{
+	width: 100%;
+	overflow: hidden;
+}
+.menue ul li{
+	font-size: 2rem;
+	line-height: 4rem;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>个人中心</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/mobile/css/user_center.css">
+</head>
+<body>
+    <div class="profile">
+        <div class="profile_left">
+            {if !empty($user_info['img'])}
+            <img src="{$user_info['img']}">
+            {else}
+            <img src="/addons/drr_gy/template/mobile/images/index/me (2).png">
+            {/if}
+        </div>
+
+        <div class="profile_right">duanruirui</div>
+    </div>
+    <div class="menue">
+        <ul>
+            <a href=""><li>我的订单</li></a>
+            <a href=""><li>问题建议</li></a>
+            <a href=""><li>用户协议</li></a>
+        </ul>
+    </div>
+
+    {template 'footer'}
+
+</body>
+</html>

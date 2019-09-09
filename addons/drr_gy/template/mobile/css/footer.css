@@ -1,0 +1,49 @@
+.footer{
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 998;
+}
+.footer ul{
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    text-decoration: none;
+    list-style:none;
+    border-top:solid gray 1px;
+}
+.footer ul li{
+    width:25%;
+    float: left;
+}
+.footer ul a{
+    text-decoration:none;
+    color: black;
+}
+
+.footer ul li dl{
+    width:100%;
+    text-align: center;
+    overflow: hidden;
+}
+.footer ul li dl dt{
+    width:100%;
+    text-align: center;
+    overflow: hidden;
+}
+.footer ul li dl dt img{
+    width: 3rem;
+    height: 3rem;
+}
+.footer ul li dl dd{
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    font-size: 1.5rem;
+}
