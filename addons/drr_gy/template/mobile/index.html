@@ -19,18 +19,18 @@
     <div class="menue_button">
     	<ul>
     		<li>
-    			<a href="">
+    			<a href="{php echo $this->createMobileUrl('shop', array('op' => 'index'))}">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/hhr.png"></dt>
-	    				<dd>认养众筹</dd>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/hand-holding-seedling.png"></dt>
+	    				<dd>果树商城</dd>
 	    			</dl>    				
     			</a>
     		</li>
     		<li>
     			<a href="{php echo $this->createMobileUrl('user_center', array('op' => 'index'))}">
 	    			<dl>
-	    				<dt><img src="/addons/drr_gy/template/mobile/images/add/icon07.png"></dt>
-	    				<dd>个人中心</dd>
+	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/tudi.png"></dt>
+	    				<dd>果园众筹</dd>
 	    			</dl>    				
     			</a>
     		</li>
@@ -117,7 +117,7 @@
     		<div class="list-title">商品列表</div>
     		<ul>
     			{loop $goods $goods}
-    			<li>
+    			<li onclick="goods_detail({$goods['id']})">
     				<dl>
     					<dt>
     						<img src="/addons/drr_gy/template/mobile/images/hhr.png">
@@ -125,14 +125,12 @@
     					<dd>
 							<span class="goods_info">{$goods['gname']}</span><br>
 							<span class="goods_price">￥{$goods['price']}</span>
-							<img src="/addons/drr_gy/template/mobile/images/index/me (2).png">
+							<img src="/addons/drr_gy/template/mobile/images/index/cart.png">
     					</dd>
     				</dl>
     			</li>
     			{/loop}
     		</ul>
-
-
     	</div>
     	
     </div>

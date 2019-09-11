@@ -872,6 +872,8 @@ CREATE TABLE IF NOT EXISTS `ims_lhyzhnc_sun_user` (
   `invitertime` int(11) DEFAULT NULL COMMENT '邀请时间',
   `hongdian` int(2) DEFAULT '2',
   `hongdian1` int(2) DEFAULT '2',
+  `password` varchar(255) DEFAULT NULL COMMENT '用户密码',
+  `username` varchar(255) DEFAULT NULL COMMENT '注册用户',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

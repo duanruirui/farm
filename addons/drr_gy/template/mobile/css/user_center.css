@@ -25,8 +25,15 @@
 .menue ul{
 	width: 100%;
 	overflow: hidden;
+    text-decoration: none;
+    list-style:none;
+}
+.menue ul a{
+	text-decoration:none;
 }
 .menue ul li{
 	font-size: 2rem;
-	line-height: 4rem;
+	line-height: 6rem;
+	text-decoration: none;
+	color: black;
 }
