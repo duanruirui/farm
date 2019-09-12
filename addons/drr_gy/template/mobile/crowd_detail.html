@@ -18,16 +18,16 @@
                 <li>
                     <dl>
                         <dt>
-                            <span>{$crowd['lottery']}</span>
+                            <span>{$crowd['lottery']}{$crowd['content']}</span>
                         </dt>
                         <dd>
-                            <div class="schadule" id="schedule">10%</div>
-                            <span style="float: left;">6666人支持</span>
+                            <div class="schadule" id="schedule">{$crowd['rate']}%</div>
+                            <span style="float: left;">{$crowd['vir']}人支持</span>
                             <div class="crowd_info">
                                 <ul>
-                                    <li><p>支持人数</p>1888人</li>
-                                    <li><p>已筹金额</p>1888元</li>
-                                    <li><p>剩余时间</p>3天</li>
+                                    <li><p>支持人数</p>{$crowd['vir']}人</li>
+                                    <li><p>已筹金额</p>{$crowd['total']}元</li>
+                                    <li><p>剩余时间</p>{$crowd['remain']}天</li>
                                 </ul>
                             </div>
                         </dd>
@@ -37,12 +37,14 @@
         </div>
     </div>
     <div class="goods_info">
-        <h3>商品详情</h3>
+        <h3>众筹详情</h3>
         {loop $banners $scoll}
         <img src="/attachment/{$scoll}">
         {/loop}
-        {$goods['content']}
-        {$goods['detail']}
+        {$crowd['content']}
+        {$crowd['detail']}
+        <h3>众筹协议</h3>
+        {$crowd['agreement']}
     </div>
     <div class="bottom_nav" id="bottom_nav">
         <span style="display: block;background-color: orange;border-radius:1rem;color: white;" id="toindex">首页</span>

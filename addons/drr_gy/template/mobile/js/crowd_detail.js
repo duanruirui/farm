@@ -62,8 +62,7 @@ function input_add(){
 function input_minus(){
 	if(obj.value>1) id('goods_num').value--;
 }
-function label_change(node){
-	var onselect = document.getElementsByClassName('onselect');
-	onselect[0].className = 'onrelease';
-	node.parentNode.className='onselect';
-}
+
+var rate=id('schedule').textContent;
+if(parseInt(rate)>100) rate='100%';
+id('schedule').setAttribute('style','width:'+rate);

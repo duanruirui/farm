@@ -51,12 +51,21 @@ body{
     color: red;
     font-size: 2rem;
 }
-.goods_info .goods_comments{
+.goods_info {
     width: 100%;
     margin: 0 auto;
     padding: 0;
     overflow: hidden;
     text-align: center;
+    margin-bottom: 3rem;
+}
+.goods_comments{
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 .goods_info img{
     margin: 0 auto;

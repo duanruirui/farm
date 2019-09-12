@@ -18,16 +18,16 @@
                 <li>
                     <dl>
                         <dt>
-                            <span><?php  echo $crowd['lottery'];?></span>
+                            <span><?php  echo $crowd['lottery'];?><?php  echo $crowd['content'];?></span>
                         </dt>
                         <dd>
-                            <div class="schadule" id="schedule">10%</div>
-                            <span style="float: left;">6666人支持</span>
+                            <div class="schadule" id="schedule"><?php  echo $crowd['rate'];?>%</div>
+                            <span style="float: left;"><?php  echo $crowd['vir'];?>人支持</span>
                             <div class="crowd_info">
                                 <ul>
-                                    <li><p>支持人数</p>1888人</li>
-                                    <li><p>已筹金额</p>1888元</li>
-                                    <li><p>剩余时间</p>3天</li>
+                                    <li><p>支持人数</p><?php  echo $crowd['vir'];?>人</li>
+                                    <li><p>已筹金额</p><?php  echo $crowd['total'];?>元</li>
+                                    <li><p>剩余时间</p><?php  echo $crowd['remain'];?>天</li>
                                 </ul>
                             </div>
                         </dd>
@@ -37,12 +37,14 @@
         </div>
     </div>
     <div class="goods_info">
-        <h3>商品详情</h3>
+        <h3>众筹详情</h3>
         <?php  if(is_array($banners)) { foreach($banners as $scoll) { ?>
         <img src="/attachment/<?php  echo $scoll;?>">
         <?php  } } ?>
-        <?php  echo $goods['content'];?>
-        <?php  echo $goods['detail'];?>
+        <?php  echo $crowd['content'];?>
+        <?php  echo $crowd['detail'];?>
+        <h3>众筹协议</h3>
+        <?php  echo $crowd['agreement'];?>
     </div>
     <div class="bottom_nav" id="bottom_nav">
         <span style="display: block;background-color: orange;border-radius:1rem;color: white;" id="toindex">首页</span>

@@ -28,6 +28,7 @@ class Crowd extends WeBase{
 
         foreach ($crowd as $key => $value) {
             $crowd[$key]['rate'] = intval($value['vir']/$value['lower']*100);
+            $crowd[$key]['total'] = $value['vir']*$value['gearone'];
         }
 
         $page = 'index';
@@ -48,6 +49,9 @@ class Crowd extends WeBase{
 
     public function Detail($crowd_id){
         $crowd = pdo_fetch('select * from ims_lhyzhnc_sun_crowd where id=:id order by id desc',array('id'=>$crowd_id));
+        $crowd['rate'] = intval($crowd['vir']/$crowd['lower']*100);
+        $crowd['total'] = $crowd['vir']*$crowd['gearone'];
+        $crowd['remain'] = intval(($crowd['time']+86400*$crowd['day']-time())/86400);
         $banners = explode(',', $crowd['imgs']);
         include $this->template('crowd_detail');
     }
