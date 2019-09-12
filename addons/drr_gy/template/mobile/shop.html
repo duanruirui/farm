@@ -12,13 +12,12 @@
     <div class="containner">
         <div class="goods_nav">
             <ul id="goods_menue">
-                <li>全部商品</li>
-                <li>精品推荐</li>
-                <li>最新上架</li>
+                <li onclick="all_goods(this)">全部商品</li>
+                <li onclick="recomend_goods(this)">精品推荐</li>
+                <li onclick="new_goods(this)">最新上架</li>
             </ul>            
         </div>
     	<div class="goods-list">
-
     		<ul>
     			{loop $goods $goods}
                 <a href="{php echo $this->createMobileUrl('goods_detail', array('op' => 'index','goods_id'=>$goods['id']))}">
@@ -35,7 +34,6 @@
                         </dl>
                     </li>  
                 </a>
-
     			{/loop}
     		</ul>
 

@@ -29,14 +29,18 @@ id('buynow').onclick = function(){
 	id('select_spec').style = 'display:block';
 }
 id('buysure').onclick = function(){
-	var input_all = tag('input');
 	var address = id('input_address').value;
-	var ordernum = id('goods_num').value;
+	if(address==''){
+		alert('请输入收货地址信息');
+		return;
+	}
+	var address = id('input_address').value;
+	var num = id('goods_num').value;
 	var specnum = id('specnum').value;
 	var price = id('input_price').value;
 	var gid = id('input_gid').value;
 	var spec = id('input_spec').value;
-	var address = id('input_address').value;
+
 	var query_string = '&gid='+gid+'&ordernum='+num+'&specnum='+specnum+'&price='+price+'&spec='+spec+'&addr='+address;
 	window.location.href = "?i=1&c=entry&op=goods&do=order&m=drr_gy"+query_string;
 }

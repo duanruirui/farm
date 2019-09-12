@@ -3,7 +3,7 @@
 <head>
     <title><?php  echo $_W['current_module']['title'];?></title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/mobile/css/goods_detail.css">
+    <link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/mobile/css/crowd_detail.css">
 </head>
 <body>
 	<?php  if(is_array($banners)) { foreach($banners as $scoll) { ?>
@@ -12,41 +12,50 @@
 	<div class="banner" id="banner">
         <img src="" id="banner_img">
     </div>
-    <div class="specs">
-        <p class="name"><?php  echo $goods['gname'];?></p>
-        <p class="description"><?php  echo $goods['lottery'];?></p>
-        <p class="sales_volume">销量：<?php  echo $goods['num'];?></p>
-        <span class="price">￥<?php  echo $goods['price'];?></span>
-        <span class="origin_price"><s>￥<?php  echo $goods['oriprice'];?></s></span>
+    <div class="containner">
+        <div class="goods-list">
+            <ul>
+                <li>
+                    <dl>
+                        <dt>
+                            <span><?php  echo $crowd['lottery'];?></span>
+                        </dt>
+                        <dd>
+                            <div class="schadule" id="schedule">10%</div>
+                            <span style="float: left;">6666人支持</span>
+                            <div class="crowd_info">
+                                <ul>
+                                    <li><p>支持人数</p>1888人</li>
+                                    <li><p>已筹金额</p>1888元</li>
+                                    <li><p>剩余时间</p>3天</li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </li>  
+            </ul>
+        </div>
     </div>
     <div class="goods_info">
-    	<h3>商品详情</h3>
+        <h3>商品详情</h3>
         <?php  if(is_array($banners)) { foreach($banners as $scoll) { ?>
         <img src="/attachment/<?php  echo $scoll;?>">
         <?php  } } ?>
         <?php  echo $goods['content'];?>
         <?php  echo $goods['detail'];?>
     </div>
-    <div class="goods_comments">
-        <h3>评论详情</h3>
-        <ul>
-            <?php  if(is_array($goods_comments)) { foreach($goods_comments as $comment) { ?>
-            <li><p><?php  echo $comment['content'];?></p><span><?php  echo $comment['time'];?></span></li>
-            <?php  } } ?>
-        </ul>
-    </div>
     <div class="bottom_nav" id="bottom_nav">
         <span style="display: block;background-color: orange;border-radius:1rem;color: white;" id="toindex">首页</span>
-        <span style="display: block;background-color: #FF3300;border-radius:1rem;color: white;" id="buynow">立即购买</span>
+        <span style="display: block;background-color: #FF3300;border-radius:1rem;color: white;" id="buynow">参与众筹</span>
     </div>
     <div class="select_spec" id="select_spec" style="display:none">
         <div class="blank" id="blank"></div>
         <div class="goods_baseinfo">
             <dl>
-                <dt id="spec_img"><img src="/attachment/<?php  echo $goods['img'];?>"></dt>
+                <dt id="spec_img"><img src="/attachment/<?php  echo $crowd['img'];?>"></dt>
                 <dd id="spec_description">
                     <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥<?php  echo $specprices['0'];?></span></p>
-                    <h2 id="content_show"><?php  echo $goods['gname'];?></h2>
+                    <h2 id="content_show"><?php  echo $crowd['gname'];?></h2>
                     <p id="num_show">库存：<?php  echo $specnums['0'];?></p>
                 </dd>
             </dl>
@@ -69,9 +78,9 @@
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_add()">+</span>
                 <input type="num" name="order_num"  id="goods_num" placeholder="" value="1">
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_minus()">-</span>
-                <input type="hidden" name="price" id="input_price" value="<?php  echo $goods['price'];?>">
+                <input type="hidden" name="price" id="input_price" value="<?php  echo $crowd['price'];?>">
                 <input type="hidden" name="specnum" id="specnum" value="<?php  echo $specnums['0'];?>">
-                <input type="hidden" name="gid" id="input_gid" value="<?php  echo $goods['id'];?>">
+                <input type="hidden" name="gid" id="input_gid" value="<?php  echo $crowd['id'];?>">
                 <input type="hidden" name="spec" id="input_spec" value="<?php  echo $specs['0'];?><?php  echo $speccontent['0'];?><?php  echo $specprices['0'];?>">
             </div>
 

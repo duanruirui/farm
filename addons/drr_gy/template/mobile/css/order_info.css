@@ -1,5 +1,35 @@
+
+body {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0;
+}
 .product_info {
 	width: 100%;
 	margin: 0 auto;
 	padding: 0;
+}
+.goods_baseinfo {
+    height: 70%;
+    padding-left: 1rem;
+    overflow: hidden;
+    background-color: white;
+    border-radius:1rem 1rem 0 0;
+}
+.goods_baseinfo dl{
+    width:100%;
+    overflow: hidden;
+}
+.goods_baseinfo dl dt{
+    float: left;
+    margin-right: 1rem;
+}
+.goods_baseinfo dl dd{
+    float: left;
+    margin: 0 auto;
+    padding: 0;
+}
+.goods_baseinfo dl dt img{
+    width: 10rem;
+    height: 10rem;
 }

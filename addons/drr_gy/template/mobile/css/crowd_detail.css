@@ -177,3 +177,96 @@ body{
     width: 10%;
     font-size: 1.2rem;
 }
+body {
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+}
+.containner {
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    background-color: white;
+}
+.goods-list {
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    background-color: white;
+}
+
+.goods-list ul {
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    text-decoration: none;
+    list-style:none;
+    background-color: white;
+}
+.goods-list ul a{
+    text-decoration: none;
+    color:black;
+}
+.goods-list ul li{
+    width: 100%;
+    float: left;
+    text-decoration: none;
+    list-style:none;
+}
+.goods-list ul li dl{
+    width:100%;
+    text-align: center;
+    overflow: hidden;
+}
+.goods-list ul li dl dt{
+    width:100%;
+    text-align: center;
+    overflow: hidden;
+}
+.goods-list ul li dl dt img{
+    width: 100%;
+    height: 20rem;
+}
+.goods-list ul li dl dd{
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.schadule {
+    margin-top: 1rem;
+    width: 10%;
+    height: 30px;
+    background-color: #4CAF50;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+.crowd_info{
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+}
+.crowd_info ul{
+    width:100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow: hidden;
+    text-decoration: none;
+    list-style:none;
+    background-color: white;
+}
+.crowd_info ul li{
+    width: 33.33%;
+    float: left;
+}

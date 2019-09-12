@@ -7,7 +7,24 @@
 </head>
 <body>
     <div class="product_info">
-        产品的基本情况
+        <div class="goods_baseinfo">
+            <dl>
+                <dt id="spec_img"><img src="/attachment/{$order_data['pic']}"></dt>
+                <dd id="spec_description">
+                    <p>单价 ￥{$order_data['price']} 数量：{$order_data['num']}    <span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">订单总金额：￥{$order_data['price']} </span></p>
+                    <h2 id="content_show">{$order_data['gname']}</h2>
+                    <p id="num_show">订单状态：{$order_data['status_statement']} 
+                        {if $order_data['status']==0}
+                        <span style="color:red;font-style: bold;font-size: 2rem;background-color: green;" onclick="pay({$order_data['ordernum']}),'goods'">去支付
+                        </span>
+                        {/if}
+                    </p>
+                </dd>
+            </dl>
+            <div class="address">
+                收货地址：{$order_data['addr']}
+            </div>
+        </div>
     </div>
     <div class="order_detail">
         订单的详细信息
@@ -16,4 +33,9 @@
     {template 'footer'}
 
 </body>
+<script type="text/javascript">
+function pay(ordernum,type){
+    window.location.href = "?i=1&c=entry&op="+type+"&ordernum="+ordernum+"&do=pay&m=drr_gy"
+}
+</script>
 </html>
