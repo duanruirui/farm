@@ -51,14 +51,25 @@
                 </dd>
             </dl>
             <div class="address">
-                收货地址：<input type="text" name="input_address" id="input_address">
+                收货地址：
+                <select id="sel-provance" onchange="selectCity();">
+                    <option value="" selected="true">请选择省份</option>
+                </select>
+                <select id="sel-city" onchange="selectcounty();">
+                    <option value="" selected="true">请选择城市</option>
+                </select>
+                <select id="sel-area" onchange="selectstreet();">
+                    <option value="" selected="true">请选择</option>
+                </select>
+                <input type="text" name="input_address" id="input_address">
             </div>
+
             <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">选择规格型号</p>
             <div class="goods_spec">
                 <ul>
                     {loop $specs $key $list}
                     <li class="{if $key == 0} onselect {else} onrelease {/if}">
-                        <span onclick="choose_spec('{$list[spec]}','{$list[spec]}{$list[speccontent]}','{$list[specnums]}','{$list[specprices]}'),label_change(this)">
+                        <span onclick="choose_spec('{$list[spec]}','{$list[spec]}{$list[speccontent]}','{$list[specnums]}','{$list[specprices]}','{$list[speci]}'),label_change(this)">
                             {$list['spec']}-{$list['speccontent']}
                         </span>
                     </li>
@@ -73,6 +84,8 @@
                 <input type="hidden" name="specnum" id="specnum" value="{$specnums[0]}">
                 <input type="hidden" name="gid" id="input_gid" value="{$goods['id']}">
                 <input type="hidden" name="spec" id="input_spec" value="{$specs[0]}{$speccontent[0]}{$specprices[0]}">
+                <input type="hidden" name="speci" id="speci" value="0">
+
             </div>
 
             <div  id="buysure">
@@ -81,5 +94,7 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
+
 <script type="text/javascript" src="../addons/drr_gy/template/mobile/js/goods_detail.js"></script>
 </html>

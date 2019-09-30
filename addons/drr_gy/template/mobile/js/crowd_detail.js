@@ -35,26 +35,23 @@ id('buysure').onclick = function(){
 		return;
 	}
 	var address = id('input_address').value;
-	var num = id('goods_num').value;
-	var specnum = id('specnum').value;
+	var num = id('order_num').value;
 	var price = id('input_price').value;
 	var gid = id('input_gid').value;
 	var spec = id('input_spec').value;
 
-	var query_string = '&gid='+gid+'&ordernum='+num+'&specnum='+specnum+'&price='+price+'&spec='+spec+'&addr='+address;
-	window.location.href = "?i=1&c=entry&op=goods&do=order&m=drr_gy"+query_string;
+	var query_string = '&gid='+gid+'&num='+num+'&price='+price+'&spec='+spec+'&addr='+address;
+	window.location.href = "?i=1&c=entry&op=crod&do=order&m=drr_gy&handle=crowdorder"+query_string;
 }
 id('blank').onclick = function(){
 	id('select_spec').style = 'display:none';
 	id('bottom_nav').style = 'display:block';
 }
-function choose_spec(spec,content,num,price){
+function choose_gear(price,spec){
 	id('price_show').innerHTML = '￥'+price;
-	id('num_show').innerHTML = num;
-	id('content_show').innerHTML = content;
+	id('content_show').innerHTML = spec;
 	id('input_price').value = price;
-	id('specnum').value = num;
-	id('input_price').input_spec = spec;
+	id('input_spec').value = spec;
 }
 function input_add(){
 	id('goods_num').value++;
@@ -62,7 +59,12 @@ function input_add(){
 function input_minus(){
 	if(obj.value>1) id('goods_num').value--;
 }
-
+function label_change(node){
+	var onselect = document.getElementsByClassName('onselect');
+	onselect[0].className = 'onrelease';
+	node.parentNode.className='onselect';
+}
 var rate=id('schedule').textContent;
 if(parseInt(rate)>100) rate='100%';
 id('schedule').setAttribute('style','width:'+rate);
+cascdeInit();

@@ -40,21 +40,23 @@ id('buysure').onclick = function(){
 	var price = id('input_price').value;
 	var gid = id('input_gid').value;
 	var spec = id('input_spec').value;
+	var speci = id('speci').value;
 
-	var query_string = '&gid='+gid+'&ordernum='+num+'&specnum='+specnum+'&price='+price+'&spec='+spec+'&addr='+address;
-	window.location.href = "?i=1&c=entry&op=goods&do=order&m=drr_gy"+query_string;
+	var query_string = '&gid='+gid+'&num='+num+'&price='+price+'&spec='+spec+'&speci='+speci+'&addr='+address;
+	window.location.href = "?i=1&c=entry&op=goods&do=order&m=drr_gy&handle=new"+query_string;
 }
 id('blank').onclick = function(){
 	id('select_spec').style = 'display:none';
 	id('bottom_nav').style = 'display:block';
 }
-function choose_spec(spec,content,num,price){
+function choose_spec(spec,content,num,price,speci){
 	id('price_show').innerHTML = '￥'+price;
 	id('num_show').innerHTML = num;
 	id('content_show').innerHTML = content;
 	id('input_price').value = price;
 	id('specnum').value = num;
-	id('input_price').input_spec = spec;
+	id('input_spec').value = spec;
+	id('speci').value = speci;
 }
 function input_add(){
 	id('goods_num').value++;
@@ -67,3 +69,5 @@ function label_change(node){
 	onselect[0].className = 'onrelease';
 	node.parentNode.className='onselect';
 }
+
+cascdeInit();

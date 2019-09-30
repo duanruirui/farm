@@ -22,10 +22,10 @@
                         </dt>
                         <dd>
                             <div class="schadule" id="schedule"><?php  echo $crowd['rate'];?>%</div>
-                            <span style="float: left;"><?php  echo $crowd['vir'];?>人支持</span>
+                            <span style="float: left;"><?php  echo $crowd['total_buyers'];?>人支持</span>
                             <div class="crowd_info">
                                 <ul>
-                                    <li><p>支持人数</p><?php  echo $crowd['vir'];?>人</li>
+                                    <li><p>支持人数</p><?php  echo $crowd['total_num'];?>人</li>
                                     <li><p>已筹金额</p><?php  echo $crowd['total'];?>元</li>
                                     <li><p>剩余时间</p><?php  echo $crowd['remain'];?>天</li>
                                 </ul>
@@ -56,21 +56,30 @@
             <dl>
                 <dt id="spec_img"><img src="/attachment/<?php  echo $crowd['img'];?>"></dt>
                 <dd id="spec_description">
-                    <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥<?php  echo $specprices['0'];?></span></p>
-                    <h2 id="content_show"><?php  echo $crowd['gname'];?></h2>
-                    <p id="num_show">库存：<?php  echo $specnums['0'];?></p>
+                    <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥<?php  echo $crowd['gearone'];?></span></p>
+                    <h2 id="content_show"><?php  echo $crowd['introone'];?></h2>
                 </dd>
             </dl>
             <div class="address">
-                收货地址：<input type="text" name="input_address" id="input_address">
+                收货地址：
+                <select id="sel-provance" onchange="selectCity();">
+                    <option value="" selected="true">请选择省份</option>
+                </select>
+                <select id="sel-city" onchange="selectcounty();">
+                    <option value="" selected="true">请选择城市</option>
+                </select>
+                <select id="sel-area" onchange="selectstreet();">
+                    <option value="" selected="true">请选择</option>
+                </select>
+                <input type="text" name="input_address" id="input_address">
             </div>
-            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">选择规格型号</p>
+            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">请选众筹套餐</p>
             <div class="goods_spec">
                 <ul>
-                    <?php  if(is_array($specs)) { foreach($specs as $key => $list) { ?>
+                    <?php  if(is_array($gearinfo)) { foreach($gearinfo as $key => $list) { ?>
                     <li class="<?php  if($key == 0) { ?> onselect <?php  } else { ?> onrelease <?php  } ?>">
-                        <span onclick="choose_spec('<?php  echo $list['spec'];?>','<?php  echo $list['spec'];?><?php  echo $list['speccontent'];?>','<?php  echo $list['specnums'];?>','<?php  echo $list['specprices'];?>'),label_change(this)">
-                            <?php  echo $list['spec'];?>-<?php  echo $list['speccontent'];?>
+                        <span onclick="choose_gear('<?php  echo $list['gear'];?>','<?php  echo $list['intro'];?>'),label_change(this)">
+                            <?php  echo $list['intro'];?>
                         </span>
                     </li>
                     <?php  } } ?>
@@ -78,12 +87,11 @@
                 购买数量:
 
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_add()">+</span>
-                <input type="num" name="order_num"  id="goods_num" placeholder="" value="1">
+                <input type="num" name="order_num"  id="order_num" placeholder="" value="1">
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_minus()">-</span>
-                <input type="hidden" name="price" id="input_price" value="<?php  echo $crowd['price'];?>">
-                <input type="hidden" name="specnum" id="specnum" value="<?php  echo $specnums['0'];?>">
+                <input type="hidden" name="price" id="input_price" value="<?php  echo $crowd['gearone'];?>">
                 <input type="hidden" name="gid" id="input_gid" value="<?php  echo $crowd['id'];?>">
-                <input type="hidden" name="spec" id="input_spec" value="<?php  echo $specs['0'];?><?php  echo $speccontent['0'];?><?php  echo $specprices['0'];?>">
+                <input type="hidden" name="spec" id="input_spec" value="<?php  echo $crowd['introone'];?>">
             </div>
 
             <div  id="buysure">
@@ -92,5 +100,7 @@
         </div>
     </div>
 <script>;</script><script type="text/javascript" src="http://farm.com/app/index.php?i=1&c=utility&a=visit&do=showjs&m=drr_gy"></script></body>
-<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/goods_detail.js"></script>
+<script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
+
+<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/crowd_detail.js"></script>
 </html>

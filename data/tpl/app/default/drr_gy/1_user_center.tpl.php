@@ -22,6 +22,7 @@
             <a href="<?php  echo $this->createMobileUrl('user_order', array('op' => 'index'))?>"><li>我的订单</li></a>
             <a href=""><li>问题建议</li></a>
             <a href=""><li>用户协议</li></a>
+            <a href=""><li>收货地址管理</li></a>
         </ul>
     </div>
 

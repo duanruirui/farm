@@ -25,7 +25,8 @@ class Goods extends WeBase{
         	$specs[$i]['spec'] = $spec[$i];
         	$specs[$i]['speccontent'] = $speccontent[$i];
         	$specs[$i]['specnums'] = $specnums[$i];
-        	$specs[$i]['specprices'] = $specprices[$i];
+            $specs[$i]['specprices'] = $specprices[$i];
+        	$specs[$i]['speci'] = $i;
         }
 
         $banners = explode(',', $goods['imgs']);

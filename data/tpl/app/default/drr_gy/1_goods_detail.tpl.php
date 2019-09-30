@@ -51,14 +51,25 @@
                 </dd>
             </dl>
             <div class="address">
-                收货地址：<input type="text" name="input_address" id="input_address">
+                收货地址：
+                <select id="sel-provance" onchange="selectCity();">
+                    <option value="" selected="true">请选择省份</option>
+                </select>
+                <select id="sel-city" onchange="selectcounty();">
+                    <option value="" selected="true">请选择城市</option>
+                </select>
+                <select id="sel-area" onchange="selectstreet();">
+                    <option value="" selected="true">请选择</option>
+                </select>
+                <input type="text" name="input_address" id="input_address">
             </div>
+
             <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">选择规格型号</p>
             <div class="goods_spec">
                 <ul>
                     <?php  if(is_array($specs)) { foreach($specs as $key => $list) { ?>
                     <li class="<?php  if($key == 0) { ?> onselect <?php  } else { ?> onrelease <?php  } ?>">
-                        <span onclick="choose_spec('<?php  echo $list['spec'];?>','<?php  echo $list['spec'];?><?php  echo $list['speccontent'];?>','<?php  echo $list['specnums'];?>','<?php  echo $list['specprices'];?>'),label_change(this)">
+                        <span onclick="choose_spec('<?php  echo $list['spec'];?>','<?php  echo $list['spec'];?><?php  echo $list['speccontent'];?>','<?php  echo $list['specnums'];?>','<?php  echo $list['specprices'];?>','<?php  echo $list['speci'];?>'),label_change(this)">
                             <?php  echo $list['spec'];?>-<?php  echo $list['speccontent'];?>
                         </span>
                     </li>
@@ -73,6 +84,8 @@
                 <input type="hidden" name="specnum" id="specnum" value="<?php  echo $specnums['0'];?>">
                 <input type="hidden" name="gid" id="input_gid" value="<?php  echo $goods['id'];?>">
                 <input type="hidden" name="spec" id="input_spec" value="<?php  echo $specs['0'];?><?php  echo $speccontent['0'];?><?php  echo $specprices['0'];?>">
+                <input type="hidden" name="speci" id="speci" value="0">
+
             </div>
 
             <div  id="buysure">
@@ -81,5 +94,7 @@
         </div>
     </div>
 <script>;</script><script type="text/javascript" src="http://farm.com/app/index.php?i=1&c=utility&a=visit&do=showjs&m=drr_gy"></script></body>
+<script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
+
 <script type="text/javascript" src="../addons/drr_gy/template/mobile/js/goods_detail.js"></script>
 </html>

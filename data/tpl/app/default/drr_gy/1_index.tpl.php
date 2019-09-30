@@ -27,7 +27,7 @@
     			</a>
     		</li>
     		<li>
-    			<a href="<?php  echo $this->createMobileUrl('crowds', array('op' => 'index'))?>">
+    			<a href="<?php  echo $this->createMobileUrl('crowd', array('op' => 'index'))?>">
 	    			<dl>
 	    				<dt><img src="/addons/drr_gy/template/mobile/images/index/tudi.png"></dt>
 	    				<dd>果园众筹</dd>

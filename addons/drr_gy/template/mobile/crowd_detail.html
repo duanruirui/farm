@@ -22,10 +22,10 @@
                         </dt>
                         <dd>
                             <div class="schadule" id="schedule">{$crowd['rate']}%</div>
-                            <span style="float: left;">{$crowd['vir']}人支持</span>
+                            <span style="float: left;">{$crowd['total_buyers']}人支持</span>
                             <div class="crowd_info">
                                 <ul>
-                                    <li><p>支持人数</p>{$crowd['vir']}人</li>
+                                    <li><p>支持人数</p>{$crowd['total_num']}人</li>
                                     <li><p>已筹金额</p>{$crowd['total']}元</li>
                                     <li><p>剩余时间</p>{$crowd['remain']}天</li>
                                 </ul>
@@ -56,21 +56,30 @@
             <dl>
                 <dt id="spec_img"><img src="/attachment/{$crowd['img']}"></dt>
                 <dd id="spec_description">
-                    <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥{$specprices[0]}</span></p>
-                    <h2 id="content_show">{$crowd['gname']}</h2>
-                    <p id="num_show">库存：{$specnums[0]}</p>
+                    <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥{$crowd['gearone']}</span></p>
+                    <h2 id="content_show">{$crowd['introone']}</h2>
                 </dd>
             </dl>
             <div class="address">
-                收货地址：<input type="text" name="input_address" id="input_address">
+                收货地址：
+                <select id="sel-provance" onchange="selectCity();">
+                    <option value="" selected="true">请选择省份</option>
+                </select>
+                <select id="sel-city" onchange="selectcounty();">
+                    <option value="" selected="true">请选择城市</option>
+                </select>
+                <select id="sel-area" onchange="selectstreet();">
+                    <option value="" selected="true">请选择</option>
+                </select>
+                <input type="text" name="input_address" id="input_address">
             </div>
-            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">选择规格型号</p>
+            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">请选众筹套餐</p>
             <div class="goods_spec">
                 <ul>
-                    {loop $specs $key $list}
+                    {loop $gearinfo $key $list}
                     <li class="{if $key == 0} onselect {else} onrelease {/if}">
-                        <span onclick="choose_spec('{$list[spec]}','{$list[spec]}{$list[speccontent]}','{$list[specnums]}','{$list[specprices]}'),label_change(this)">
-                            {$list['spec']}-{$list['speccontent']}
+                        <span onclick="choose_gear('{$list[gear]}','{$list[intro]}'),label_change(this)">
+                            {$list['intro']}
                         </span>
                     </li>
                     {/loop}
@@ -78,12 +87,11 @@
                 购买数量:
 
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_add()">+</span>
-                <input type="num" name="order_num"  id="goods_num" placeholder="" value="1">
+                <input type="num" name="order_num"  id="order_num" placeholder="" value="1">
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_minus()">-</span>
-                <input type="hidden" name="price" id="input_price" value="{$crowd['price']}">
-                <input type="hidden" name="specnum" id="specnum" value="{$specnums[0]}">
+                <input type="hidden" name="price" id="input_price" value="{$crowd['gearone']}">
                 <input type="hidden" name="gid" id="input_gid" value="{$crowd['id']}">
-                <input type="hidden" name="spec" id="input_spec" value="{$specs[0]}{$speccontent[0]}{$specprices[0]}">
+                <input type="hidden" name="spec" id="input_spec" value="{$crowd['introone']}">
             </div>
 
             <div  id="buysure">
@@ -92,5 +100,7 @@
         </div>
     </div>
 </body>
-<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/goods_detail.js"></script>
+<script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
+
+<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/crowd_detail.js"></script>
 </html>
