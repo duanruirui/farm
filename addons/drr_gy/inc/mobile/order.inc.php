@@ -51,7 +51,7 @@ if (empty($_SESSION['app_user_login'])) {
 			$order_data['status_statement'] = $GOODS_STATUS[$order_data['status']];
 			break;
 		
-		case 'activity':
+		case 'crowd':
 			#
 			break;
 			
