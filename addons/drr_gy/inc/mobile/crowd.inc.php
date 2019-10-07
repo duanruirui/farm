@@ -20,7 +20,6 @@ if (isset($_GET['op'])) {
 	Crowd::Index();
 }
 
-error_reporting(E_ALL);
 
 class Crowd extends WeBase{
 
@@ -56,17 +55,17 @@ class Crowd extends WeBase{
         }
         $crowd = pdo_fetchall('select * from ims_lhyzhnc_sun_crowd where status=:status order by sort asc',array('status'=>2));
         if(!empty($crowd)){
-            $crowd_orders = pdo_fetchall("select count(*) as counts,uid,sum(num) as num from ims_lhyzhnc_sun_crowdorder where uid in (".implode(',', array_column($crowd, 'id')).")");
+            $crowd_orders = pdo_fetchall("select count(*) as counts,cid,sum(num) as num,sum(price) as price from ims_lhyzhnc_sun_crowdorder where cid in (".implode(',', array_column($crowd, 'id')).") group by cid");
             $crowd_orders_arr = array();
             foreach ($crowd_orders as $key => $value) {
-                $crowd_orders_arr[$value['uid']] = $value;
+                $crowd_orders_arr[$value['cid']] = $value;
             }
             foreach ($crowd as $key => $value) {
                 $total_num = $value['vir']+ $crowd_orders_arr[$value['id']]['num'];
                 $crowd[$key]['total_buyers'] = $value['vir']+$crowd_orders_arr[$value['id']]['counts'];
                 $crowd[$key]['total_num'] = $total_num;
                 $crowd[$key]['rate'] = intval($total_num/$value['lower']*100);
-                $crowd[$key]['total'] = $total_num*$value['gearone'];
+                $crowd[$key]['total'] = $crowd_orders_arr[$value['id']]['price']+$value['vir']*$value['gearone'];
                 $crowd[$key]['remain'] = intval(($value['time']+86400*$value['day']-time())/86400);
             }            
         }
@@ -90,12 +89,12 @@ class Crowd extends WeBase{
 
     public function Detail($crowd_id){
         $crowd = pdo_fetch('select * from ims_lhyzhnc_sun_crowd where id=:id order by id desc',array('id'=>$crowd_id));
-        $crowd_order = pdo_fetch('select count(*) as counts,sum(num) as num from ims_lhyzhnc_sun_crowdorder where uid=:id',array('id'=>$crowd_id));
+        $crowd_order = pdo_fetch('select count(*) as counts,sum(num) as num from ims_lhyzhnc_sun_crowdorder where cid=:id',array('id'=>$crowd_id));
         $total_num = $crowd['vir']+$crowd_order['num'];
         $crowd['total_num'] = $total_num;
         $crowd['total_buyers'] = $crowd['vir']+$crowd_order['counts'];
         $crowd['rate'] = intval($total_num/$crowd['lower']*100);
-        $crowd['total'] = $total_num*$crowd['gearone'];
+        $crowd['total'] = pdo_fetchcolumn('select sum(price) as total from ims_lhyzhnc_sun_crowdorder where cid='.$crowd_id)+$crowd['vir']*$crowd['gearone'];
         $crowd['remain'] = intval(($crowd['time']+86400*$crowd['day']-time())/86400);
         $banners = explode(',', $crowd['imgs']);
         $gearinfo = array();

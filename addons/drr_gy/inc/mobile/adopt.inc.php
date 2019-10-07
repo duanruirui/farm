@@ -24,7 +24,25 @@ class Adopt extends WeBase{
 
     public function Index(){
 
-        $crowd = pdo_getall('lhyzhnc_sun_adopt',array('status'=>2));
+        $adopt = pdo_getall('lhyzhnc_sun_adopt',array('status'=>2));
+
+        $adopt_ids = array();
+
+        foreach ($adopt as $key => $value) {
+
+            array_push($adopt_ids, $value['id']);
+
+        }
+
+        $adopt_sales = pdo_fetchall('select count(num) as adopt_order_num,aid,count(distinct uid) as adopt_order_people from ims_lhyzhnc_sun_adoptorder where aid in ('.implode(',', $adopt_ids).') group by aid ');
+
+        $adopt_sales_arr = array();
+
+        foreach ($adopt_sales as $key => $value) {
+
+            $adopt_sales_arr[$value['aid']] = $value;
+            
+        }
 
         $page = 'index';
 
@@ -34,21 +52,18 @@ class Adopt extends WeBase{
 
     public function Newlly(){
 
-        $crowd = pdo_fetchall('select * from lhyzhnc_sun_adopt where status=:status order by id desc',array('status'=>2));
+        $crowd = pdo_fetchall('select * from ims_lhyzhnc_sun_adopt where status=:status order by id desc',array('status'=>2));
         
         $page = 'newlly';
 
-        include $this->template('crowd');
+        include $this->template('adopt');
 
     }
 
     public function Detail(){
-        $crowd = pdo_fetch('select * from lhyzhnc_sun_adopt where id=:id order by id desc',array('id'=>$crowd_id));
-        $crowd['rate'] = intval($crowd['vir']/$crowd['lower']*100);
-        $crowd['total'] = $crowd['vir']*$crowd['gearone'];
-        $crowd['remain'] = intval(($crowd['time']+86400*$crowd['day']-time())/86400);
-        $banners = explode(',', $crowd['imgs']);
-        include $this->template('crowd_detail');
+        $adopt = pdo_fetch('select * from ims_lhyzhnc_sun_adopt where id=:id order by id desc',array('id'=>$_GET['adopt_id']));
+        $banners = explode(',', $adopt['imgs']);
+        include $this->template('adopt_detail');
     }
 }
 

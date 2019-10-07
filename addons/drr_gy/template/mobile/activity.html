@@ -3,23 +3,23 @@
 <head>
     <title>{$_W['current_module']['title']}</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/mobile/css/adopt.css">
+    <link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/mobile/css/activity.css">
 </head>
 <body>
     <div class="containner">
         <div class="goods-list">
             <ul>
-                {loop $adopt $list}
-                <a href="{php echo $this->createMobileUrl('adopt', array('op' => 'adopt_detail','adopt_id'=>$list['id']))}">
+                {loop $activity $list}
+                <a href="{php echo $this->createMobileUrl('activity', array('op' => 'activity_detail','activity_id'=>$list['id']))}">
                     <li>
                         <dl>
                             <dt>
-                                <img src="/attachment/{$list['img']}">
+                                <img src="/attachment/{$list['pic']}">
                                 <span>{$list['name']}</span>
                             </dt>
                             <dd>
-                                <span style="float: left;">认养人数{php echo $adopt_sales_arr[$list['id']]['adopt_order_people']+$list['vir']}</span>
-                                <span style="float: left;">销量{php echo $adopt_sales_arr[$list['id']]['adopt_order_num']+$list['vir']}</span>
+                                <span style="float: left;">认养人数{php echo $activity_sales_arr[$list['id']]['activity_order_people']+$list['vir']}</span>
+                                <span style="float: left;">销量{php echo $activity_sales_arr[$list['id']]['activity_order_num']+$list['vir']}</span>
                                 <span style="float: left;margin-left: 2rem;color: red">价格{$list['price']}元</span>
                             </dd>
                         </dl>
@@ -33,5 +33,5 @@
     {template 'footer'}
 
 </body>
-<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/adopt.js"></script>
+<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/activity.js"></script>
 </html>

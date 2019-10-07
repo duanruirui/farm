@@ -18,16 +18,16 @@
                 <li>
                     <dl>
                         <dt>
-                            <span>{$crowd['lottery']}{$crowd['content']}</span>
+                            <span>{$adopt['lottery']}{$adopt['content']}</span>
                         </dt>
                         <dd>
-                            <div class="schadule" id="schedule">{$crowd['rate']}%</div>
-                            <span style="float: left;">{$crowd['total_buyers']}人支持</span>
+                            <div class="schadule" id="schedule">{$adopt['rate']}%</div>
+                            <span style="float: left;">{$adopt['total_buyers']}人支持</span>
                             <div class="crowd_info">
                                 <ul>
-                                    <li><p>支持人数</p>{$crowd['total_num']}人</li>
-                                    <li><p>已筹金额</p>{$crowd['total']}元</li>
-                                    <li><p>剩余时间</p>{$crowd['remain']}天</li>
+                                    <li><p>支持人数</p>{$adopt['total_num']}人</li>
+                                    <li><p>已筹金额</p>{$adopt['total']}元</li>
+                                    <li><p>剩余时间</p>{$adopt['remain']}天</li>
                                 </ul>
                             </div>
                         </dd>
@@ -37,27 +37,27 @@
         </div>
     </div>
     <div class="goods_info">
-        <h3>众筹详情</h3>
+        <h3>认养详情</h3>
         {loop $banners $scoll}
         <img src="/attachment/{$scoll}">
         {/loop}
-        {$crowd['content']}
-        {$crowd['detail']}
-        <h3>众筹协议</h3>
-        {$crowd['agreement']}
+        {$adopt['content']}
+        {$adopt['detail']}
+        <h3>认养协议</h3>
+        {$adopt['agreement']}
     </div>
     <div class="bottom_nav" id="bottom_nav">
         <span style="display: block;background-color: orange;border-radius:1rem;color: white;" id="toindex">首页</span>
-        <span style="display: block;background-color: #FF3300;border-radius:1rem;color: white;" id="buynow">参与众筹</span>
+        <span style="display: block;background-color: #FF3300;border-radius:1rem;color: white;" id="buynow">参与认养</span>
     </div>
     <div class="select_spec" id="select_spec" style="display:none">
         <div class="blank" id="blank"></div>
         <div class="goods_baseinfo">
             <dl>
-                <dt id="spec_img"><img src="/attachment/{$crowd['img']}"></dt>
+                <dt id="spec_img"><img src="/attachment/{$adopt['img']}"></dt>
                 <dd id="spec_description">
-                    <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥{$crowd['gearone']}</span></p>
-                    <h2 id="content_show">{$crowd['introone']}</h2>
+                    <p><span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">￥{$adopt['price']}</span></p>
+                    <h2 id="content_show">{$adopt['introone']}</h2>
                 </dd>
             </dl>
             <div class="address">
@@ -73,25 +73,14 @@
                 </select>
                 <input type="text" name="input_address" id="input_address">
             </div>
-            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">请选套餐</p>
-            <div class="goods_spec">
-                <ul>
-                    {loop $gearinfo $key $list}
-                    <li class="{if $key == 0} onselect {else} onrelease {/if}">
-                        <span onclick="choose_gear('{$list[gear]}','{$list[intro]}'),label_change(this)">
-                            {$list['intro']}
-                        </span>
-                    </li>
-                    {/loop}
-                </ul>
-                购买数量:
 
+            <div class="goods_spec">
+                购买数量:
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_add()">+</span>
                 <input type="num" name="order_num"  id="order_num" placeholder="" value="1">
                 <span style="color: green;float: right;font-size: 3rem;line-height: 2rem;" onclick="input_minus()">-</span>
-                <input type="hidden" name="price" id="input_price" value="{$crowd['gearone']}">
-                <input type="hidden" name="gid" id="input_gid" value="{$crowd['id']}">
-                <input type="hidden" name="spec" id="input_spec" value="{$crowd['introone']}">
+                <input type="hidden" name="price" id="input_price" value="{$adopt['price']}">
+                <input type="hidden" name="gid" id="input_gid" value="{$adopt['id']}">
             </div>
 
             <div  id="buysure">
@@ -102,5 +91,5 @@
 </body>
 <script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
 
-<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/crowd_detail.js"></script>
+<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/adopt_detail.js"></script>
 </html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>订单详情</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="../addons/drr_gy/template/mobile/css/order_info.css">
+</head>
+<body>
+    <div class="product_info">
+        <div class="goods_baseinfo">
+            <dl>
+                <dt id="spec_img"><img src="/attachment/{$crowd['pic']}"></dt>
+                <dd id="spec_description">
+                    <p>单价 ￥{$crowd_data['price']} 数量：{$crowd_data['num']}    <span style="color:red;font-style: bold;font-size: 2rem;" id="price_show">订单总金额：￥{$crowd_data['price']} </span></p>
+                    <h2 id="content_show">{$crowd['name']}</h2>
+                    <p id="num_show">订单状态：{$crowd_data['status_statement']} 
+                        {if $crowd_data['status']==1}
+                        <span style="color:red;font-style: bold;font-size: 2rem;background-color: green;" onclick="pay({$crowd_data['ordernum']}),'goods'">去支付
+                        </span>
+                        {/if}
+                    </p>
+                </dd>
+            </dl>
+            <div class="address">
+                收货地址：{$crowd_data['addr']}
+            </div>
+        </div>
+    </div>
+    <div class="order_detail">
+        订单的详细信息
+    </div>
+
+    {template 'footer'}
+
+</body>
+<script type="text/javascript">
+function pay(ordernum,type){
+    window.location.href = "?i=1&c=entry&op="+type+"&ordernum="+ordernum+"&do=pay&m=drr_gy"
+}
+</script>
+</html>

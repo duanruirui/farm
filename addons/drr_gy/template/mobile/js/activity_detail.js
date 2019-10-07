@@ -67,4 +67,3 @@ function label_change(node){
 var rate=id('schedule').textContent;
 if(parseInt(rate)>100) rate='100%';
 id('schedule').setAttribute('style','width:'+rate);
-cascdeInit();

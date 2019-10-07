@@ -73,7 +73,7 @@
                 </select>
                 <input type="text" name="input_address" id="input_address">
             </div>
-            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">请选众筹套餐</p>
+            <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">请选套餐</p>
             <div class="goods_spec">
                 <ul>
                     <?php  if(is_array($gearinfo)) { foreach($gearinfo as $key => $list) { ?>

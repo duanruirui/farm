@@ -15,7 +15,7 @@
         </ul>
     </div>
     <div class="order_container">
-<!--         <div class="order_status">
+        <div class="order_status">
             <ul id="deliver">
                 <li>待支付</li>
                 <li>已支付</li>
@@ -27,11 +27,24 @@
                 <li>待核销</li>
                 <li>已核销</li>
             </ul>
-        </div> -->
+        </div>
         <div class="order_list">
             <ul>
                 <li>
                     <div class="order_state">
+                        <span style="float: left;">订单状态:  待支付</span>
+                    </div>
+                    <dl>
+                        <dt>图片1</dt>
+                        <dd>
+                            <div class="order_name">订单1</div>
+                            <div class="order_detail">价格，数量</div>
+                            <div class="order_hande">订单状态</div>
+                        </dd>
+                    </dl>
+                </li>
+                <li>
+                <div class="order_state">
                         <span style="float: left;">订单状态:  待支付</span>
                     </div>
                     <dl>
