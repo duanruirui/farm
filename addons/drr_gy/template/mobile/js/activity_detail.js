@@ -29,19 +29,12 @@ id('buynow').onclick = function(){
 	id('select_spec').style = 'display:block';
 }
 id('buysure').onclick = function(){
-	var address = id('input_address').value;
-	if(address==''){
-		alert('请输入收货地址信息');
-		return;
-	}
-	var address = id('input_address').value;
 	var num = id('order_num').value;
 	var price = id('input_price').value;
 	var gid = id('input_gid').value;
-	var spec = id('input_spec').value;
 
-	var query_string = '&gid='+gid+'&num='+num+'&price='+price+'&spec='+spec+'&addr='+address;
-	window.location.href = "?i=1&c=entry&op=crowd&do=order&m=drr_gy&handle=new"+query_string;
+	var query_string = '&gid='+gid+'&num='+num+'&price='+price;
+	window.location.href = "?i=1&c=entry&op=activity&do=order&m=drr_gy&handle=new"+query_string;
 }
 id('blank').onclick = function(){
 	id('select_spec').style = 'display:none';

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>收货地址管理</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <div class="address_container">
+        <div class="address_list">
+            <ul>
+                {loop $address $list}
+                <li>
+                    收货人：{$list['username']}
+                    电话：{$list['mobile']}
+                    地址：{$list['address']}
+                    <a href="javascript:edit_address({$list['id']},{$list['username']},{$list['mobile']},{$list['province']},{$list['city']},{$list['district']},{$list['address']});">编辑</a>
+                    <a href="javascript:delete_address({$list['id']});">删除</a>
+                </li>
+                {/loop}
+            </ul>          
+        </div>
+        <button onclick="add_new_address()">添加新地址</button>
+        <div class="address" id="address">
+            <input type="hidden" name="address_id" id="address_id">
+            收货人姓名<input type="text" name="username" id="username">
+            收货人电话<input type="number" name="mobile" id="mobile">
+            收货地址：
+            <select id="sel-provance" onchange="selectCity();">
+                <option value="" selected="true">请选择省份</option>
+            </select>
+            <select id="sel-city" onchange="selectcounty();">
+                <option value="" selected="true">请选择城市</option>
+            </select>
+            <select id="sel-area" onchange="selectstreet();">
+                <option value="" selected="true">请选择</option>
+            </select>
+            <input type="text" name="input_address" id="input_address">
+            <button onclick="submit_address()">提交</button>
+        </div>
+    </div>
+
+    {template 'footer'}
+
+</body>
+<script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
+<script type="text/javascript">
+    cascdeInit();
+    function add_new_address(){
+        var address = document.getElementById('address');
+        address.setAttribute('style','display:block');
+    }
+    function submit_address(){
+        var province = document.getElementById('sel-provance').value;
+        var city = document.getElementById('sel-city').value;
+        var district = document.getElementById('sel-area').value;
+        var address = document.getElementById('input_address').value;
+        var username = document.getElementById('username').value;
+        var mobile = document.getElementById('mobile').value;
+        var address_id = document.getElementById('address_id').value;
+        if(address==''){
+            alert('请输入收货地址信息');
+            return;
+        }
+        if(address_id==''){
+            var query_string = '&province='+province+'&city='+city+'&district='+district+'&address='+address+'&username='+username+'&mobile='+mobile;
+            window.location.href = "?i=1&c=entry&op=add&do=user_address&m=drr_gy"+query_string;
+        }else{
+            var query_string = '&province='+province+'&city='+city+'&district='+district+'&address='+address+'&username='+username+'&mobile='+mobile+'&address_id='+address_id;
+            window.location.href = "?i=1&c=entry&op=edit&do=user_address&m=drr_gy"+query_string;
+        }
+
+    }
+    function edit_address(id,username,mobile,province,city,district,address){
+        document.getElementById('address_id').value=id;
+    }
+    function delete_address(id){
+        window.location.href = "?i=1&c=entry&op=delete&do=user_address&m=drr_gy&address_id"+id;
+    }
+</script>
+</html>

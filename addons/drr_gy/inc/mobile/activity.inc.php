@@ -52,7 +52,7 @@ class Activity extends WeBase{
 
     public function Newlly(){
 
-        $crowd = pdo_fetchall('select * from ims_lhyzhnc_sun_activity where status=:status order by id desc',array('status'=>2));
+        $activity = pdo_fetchall('select * from ims_lhyzhnc_sun_activity where status=:status order by id desc',array('status'=>2));
         
         $page = 'newlly';
 
@@ -62,6 +62,13 @@ class Activity extends WeBase{
 
     public function Detail(){
         $activity = pdo_fetch('select * from ims_lhyzhnc_sun_activity where id=:id order by id desc',array('id'=>$_GET['activity_id']));
+        $activity_order = pdo_fetch('select count(*) as counts,sum(num) as num from ims_lhyzhnc_sun_activityorder where aid=:id',array('id'=>$_GET['activity_id']));
+        $total_num = $activity['vir']+$activity_order['num'];
+        $activity['total_num'] = $total_num;
+        $activity['total_buyers'] = $activity['vir']+$activity_order['counts'];
+        $activity['rate'] = intval($total_num/$activity['num']*100);
+        $activity['total'] = pdo_fetchcolumn('select sum(price) as total from ims_lhyzhnc_sun_activityorder where aid='.$_GET['activity_id'])+$activity['vir']*$activity['price'];
+        $activity['remain'] = intval(($activity['time']+86400*$activity['day']-time())/86400);
         $banners = explode(',', $activity['imgs']);
         include $this->template('activity_detail');
     }

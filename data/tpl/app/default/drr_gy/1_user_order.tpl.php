@@ -8,54 +8,30 @@
 <body>
     <div class="order_nav">
         <ul>
-            <a href=""><li>认养订单</li></a>
-            <a href=""><li>众筹订单</li></a>
-            <a href=""><li>活动订单</li></a>
-            <a href=""><li>商品订单</li></a>
+            <a href="?i=1&c=entry&op=adopt&do=user_order&m=drr_gy"><li>认养订单</li></a>
+            <a href="?i=1&c=entry&op=crowd&do=user_order&m=drr_gy"><li>众筹订单</li></a>
+            <a href="?i=1&c=entry&op=activity&do=user_order&m=drr_gy"><li>活动订单</li></a>
+            <a href="?i=1&c=entry&op=goods&do=user_order&m=drr_gy"><li>商品订单</li></a>
         </ul>
     </div>
     <div class="order_container">
-        <div class="order_status">
-            <ul id="deliver">
-                <li>待支付</li>
-                <li>已支付</li>
-                <li>已发货</li>
-                <li>已完成</li>
-            </ul>
-            <ul id="active">
-                <li>待支付</li>
-                <li>待核销</li>
-                <li>已核销</li>
-            </ul>
-        </div>
         <div class="order_list">
             <ul>
+                <?php  if(is_array($order_data)) { foreach($order_data as $list) { ?>
                 <li>
-                    <div class="order_state">
-                        <span style="float: left;">订单状态:  待支付</span>
-                    </div>
                     <dl>
-                        <dt>图片1</dt>
+                        <dt><img src="/attachment/<?php  echo $list['img'];?>"></dt>
                         <dd>
-                            <div class="order_name">订单1</div>
-                            <div class="order_detail">价格，数量</div>
-                            <div class="order_hande">订单状态</div>
+                            <div class="order_name"> <?php  echo $list['name'];?></div>
+                            <div class="order_detail">价格<?php  echo $list['price'];?>元，数量<?php  echo $list['num'];?></div>
+                            <div class="order_hande">订单状态：<?php  echo $list['status_state'];?>&nbsp;&nbsp;<?php  if($list['status_state']=='未支付') { ?>去支付&nbsp;&nbsp;取消订单&nbsp;&nbsp;<?php  } else if($list['status_state']=='已发货') { ?>快递公司：<?php  echo $list['way'];?>&nbsp;&nbsp;快递单号：<?php  echo $list['waybill'];?><?php  } ?></div>
+                            <div class="order_mum">订单编号:  <?php  echo $list['ordernum'];?></div>
+                            <div class="order_time">下单时间:  <?php  echo $list['time'];?></div>
+                            <div class="order_addr">收货地址:  <?php  echo $list['addr'];?></div>
                         </dd>
                     </dl>
                 </li>
-                <li>
-                <div class="order_state">
-                        <span style="float: left;">订单状态:  待支付</span>
-                    </div>
-                    <dl>
-                        <dt>图片1</dt>
-                        <dd>
-                            <div class="order_name">订单1</div>
-                            <div class="order_detail">价格，数量</div>
-                            <div class="order_hande">订单状态</div>
-                        </dd>
-                    </dl>
-                </li>
+                <?php  } } ?>
             </ul>            
         </div>
     </div>
