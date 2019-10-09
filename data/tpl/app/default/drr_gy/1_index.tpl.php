@@ -58,7 +58,7 @@
     		<div class="list-title">认养果树列表</div>
     		<ul>
     			<?php  if(is_array($adopts)) { foreach($adopts as $adopt) { ?>
-    			<li>
+    			<li onclick="adopt_detail(<?php  echo $adopt['id'];?>)">
     				<dl>
     					<dt>
     						<img src="/attachment/<?php  echo $adopt['pic'];?>">
@@ -76,7 +76,7 @@
     		<div class="list-title">众筹列表</div>
     		<ul>
     			<?php  if(is_array($crowds)) { foreach($crowds as $crowd) { ?>
-    			<li>
+    			<li onclick="crowd_detail(<?php  echo $crowd['id'];?>)">
     				<dl>
     					<dt>
     						<img src="/attachment/<?php  echo $crowd['pic'];?>">

@@ -61,17 +61,13 @@
                 </dd>
             </dl>
             <div class="address">
-                收货地址：
-                <select id="sel-provance" onchange="selectCity();">
-                    <option value="" selected="true">请选择省份</option>
-                </select>
-                <select id="sel-city" onchange="selectcounty();">
-                    <option value="" selected="true">请选择城市</option>
-                </select>
-                <select id="sel-area" onchange="selectstreet();">
-                    <option value="" selected="true">请选择</option>
-                </select>
-                <input type="text" name="input_address" id="input_address">
+                <div class="select_address_button" id="select_address_button" onclick="get_address()">选择收货地址</div>
+                <input type="hidden" name="input_address" id="input_address">
+                <div class="address_section" id="address_section" style="display: none;">
+                    <ul class="address_list" id="address_list">
+                    </ul>
+                </div>
+                <div class="address_display" id="address_display"></div>
             </div>
             <p style="float:left;width: 100%;padding-left:0;margin-left:0;text-align: left;">请选套餐</p>
             <div class="goods_spec">
@@ -100,7 +96,6 @@
         </div>
     </div>
 <script>;</script><script type="text/javascript" src="http://farm.com/app/index.php?i=1&c=utility&a=visit&do=showjs&m=drr_gy"></script></body>
-<script type="text/javascript" src="../addons/drr_gy/static/js/dist/area/cascade.js"></script>
 
-<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/crowd_detail.js"></script>
+<script type="text/javascript" src="../addons/drr_gy/template/mobile/js/crowd_detail.js" charset="utf-8"></script>
 </html>

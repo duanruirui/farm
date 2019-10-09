@@ -15,7 +15,7 @@
                     <h2 id="content_show">{$order_data['gname']}</h2>
                     <p id="num_show">订单状态：{$order_data['status_statement']} 
                         {if $order_data['status']==0}
-                        <span style="color:red;font-style: bold;font-size: 2rem;background-color: green;" onclick="pay({$order_data['ordernum']}),'goods'">去支付
+                        <span style="color:red;font-style: bold;font-size: 2rem;background-color: green;" onclick="pay({$order_data['ordernum']},'goods')">去支付
                         </span>
                         {/if}
                     </p>

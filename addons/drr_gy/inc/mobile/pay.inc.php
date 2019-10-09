@@ -24,12 +24,18 @@ if (empty($_SESSION['app_user_login'])) {
 	switch ($_GET['op']) {
 		case 'goods':
 			$order_info = pdo_get('lhyzhnc_sun_goodsorder',array('ordernum'=>$_GET['ordernum']));
-			if($order_info['status']!=0) echo '订单状态不允许支付';
-
+			if($order_info['status'] !=0 ){
+				echo '订单状态不允许支付';
+				die;
+			}
 			break;
 		
-		case 'activity':
-			#
+		case 'crowd':
+			$order_info = pdo_get('lhyzhnc_sun_crowdorder',array('ordernum'=>$_GET['ordernum']));
+			if($order_info['status'] !=1 ){
+				echo '订单状态不允许支付';
+				die;
+			}
 			break;
 		default:
 			# code...

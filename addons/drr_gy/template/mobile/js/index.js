@@ -24,5 +24,11 @@ function changeImg(){
     if(i<0) i = scolls.length - 1;
 }
 function goods_detail(gid){
-	window.location.href = "?i=1&c=entry&op=index&goods_id=2&do=goods_detail&m=drr_gy";
+	window.location.href = "?i=1&c=entry&op=index&goods_id="+gid+"&do=goods_detail&m=drr_gy";
+}
+function adopt_detail(aid){
+	window.location.href = "?i=1&c=entry&op=adopt_detail&adopt_id="+aid+"&do=adopt&m=drr_gy";
+}
+function crowd_detail(cid){
+	window.location.href = "?i=1&c=entry&op=crowd_detail&crowd_id="+cid+"&do=crowd&m=drr_gy";
 }

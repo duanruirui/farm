@@ -58,7 +58,7 @@
     		<div class="list-title">认养果树列表</div>
     		<ul>
     			{loop $adopts $adopt}
-    			<li>
+    			<li onclick="adopt_detail({$adopt['id']})">
     				<dl>
     					<dt>
     						<img src="/attachment/{$adopt['pic']}">
@@ -76,7 +76,7 @@
     		<div class="list-title">众筹列表</div>
     		<ul>
     			{loop $crowds $crowd}
-    			<li>
+    			<li onclick="crowd_detail({$crowd['id']})">
     				<dl>
     					<dt>
     						<img src="/attachment/{$crowd['pic']}">

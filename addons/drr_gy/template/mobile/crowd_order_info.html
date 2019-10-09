@@ -15,7 +15,7 @@
                     <h2 id="content_show">{$crowd['name']}</h2>
                     <p id="num_show">订单状态：{$crowd_data['status_statement']} 
                         {if $crowd_data['status']==1}
-                        <span style="color:red;font-style: bold;font-size: 2rem;background-color: green;" onclick="pay({$crowd_data['ordernum']}),'goods'">去支付
+                        <span style="color:red;font-style: bold;font-size: 2rem;background-color: green;" onclick="pay({$crowd_data['ordernum']},'crowd')">去支付
                         </span>
                         {/if}
                     </p>

@@ -16,14 +16,14 @@
                     收货人：{$list['username']}
                     电话：{$list['mobile']}
                     地址：{$list['address']}
-                    <a href="javascript:edit_address({$list['id']},{$list['username']},{$list['mobile']},{$list['province']},{$list['city']},{$list['district']},{$list['address']});">编辑</a>
+                    <a href="javascript:edit_address({$list['id']},'{$list['username']}',{$list['mobile']},'{$list['province']}','{$list['city']}','{$list['district']}','{$list['address']}');">编辑</a>
                     <a href="javascript:delete_address({$list['id']});">删除</a>
                 </li>
                 {/loop}
             </ul>          
         </div>
         <button onclick="add_new_address()">添加新地址</button>
-        <div class="address" id="address">
+        <div class="address" id="address" style="display: none;">
             <input type="hidden" name="address_id" id="address_id">
             收货人姓名<input type="text" name="username" id="username">
             收货人电话<input type="number" name="mobile" id="mobile">
@@ -49,8 +49,8 @@
 <script type="text/javascript">
     cascdeInit();
     function add_new_address(){
-        var address = document.getElementById('address');
-        address.setAttribute('style','display:block');
+        document.getElementById('address').setAttribute('style','display:block');
+        document.getElementById('address_id').value='';
     }
     function submit_address(){
         var province = document.getElementById('sel-provance').value;
@@ -74,10 +74,23 @@
 
     }
     function edit_address(id,username,mobile,province,city,district,address){
+        document.getElementById('address').setAttribute('style','display:block');
         document.getElementById('address_id').value=id;
+        document.getElementById('username').value=username;
+        document.getElementById('mobile').value=mobile;
+        document.getElementById('input_address').value=address;
+    }
+    function set_select_checked(selectId, checkValue){  
+        var select = document.getElementById(selectId);  
+        for (var i = 0; i < select.options.length; i++){  
+            if (select.options[i].value == checkValue){  
+                select.options[i].selected = true;  
+                break;  
+            }  
+        }  
     }
     function delete_address(id){
-        window.location.href = "?i=1&c=entry&op=delete&do=user_address&m=drr_gy&address_id"+id;
+        window.location.href = "?i=1&c=entry&op=delete&do=user_address&m=drr_gy&address_id="+id;
     }
 </script>
 </html>
